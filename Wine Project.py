@@ -104,14 +104,14 @@ def Registration():
 
     while True:
         firstName = input("\nNext, enter the employee's first name: ").strip().title()
-        if firstName and firstName.isalpha():
+        if firstName:
             break
         else:
             print("\nThe employee's first name cannot be left blank and can only contain letters. Please try again.")
 
     while True:
         lastName = input("\nEnter the employee's last name: ").strip().title()
-        if lastName and lastName.isalpha():
+        if lastName:
             break
         else:
             print("\nThe employee's last name cannot be left blank and can only contain letters. Please try again.")
@@ -125,14 +125,14 @@ def Registration():
 
     while True:
         city = input("\nEnter the employees's city: ").strip().title()
-        if city and city.isalpha():
+        if city():
             break
         else:
             print("\nThe employee's city cannot be left blank and can only contain letters. Please try again.")
 
     while True:
-        state = input("\nEnter the employee's state: ").strip().title()
-        if state and state.isalpha():
+        state = input("\nEnter the employee's state (enter the two letter abbreviation for the state): ").strip().upper()
+        if state and state.isalpha() and len(state) == 2:
             break
         else:
             print("\nThe employee's state cannot be left blank and can only contain letters. Please try again.")
@@ -299,6 +299,92 @@ def Association():
 
             else:
                 print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+
+    if association_choice == "b":
+
+        while True:
+            wine_choice = input(
+                "\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
+
+            if wine_choice == "red":
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "volatile acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    red = allWines.loc[allWines['type'] == 'red', :]
+
+                    getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+                while True:
+                    after = input(
+                        "\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
+                    if after == "test":
+                        Association()
+                    if after == "main":
+                        Menu()
+                    if after == "quit":
+                        print("\nHave a great day!")
+                        break
+                    else:
+                        print(
+                            "\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+
+            if wine_choice == "white":
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "volatile acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    white = allWines.loc[allWines['type'] == 'white', :]
+
+                    getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+                while True:
+                    after = input(
+                        "\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
+                    if after == "test":
+                        Association()
+                    if after == "main":
+                        Menu()
+                    if after == "quit":
+                        print("\nHave a great day!")
+                        break
+                    else:
+                        print(
+                            "\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+
+            else:
+                print(
+                    "\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
 
 # Function calls:
