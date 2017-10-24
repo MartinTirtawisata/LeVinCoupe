@@ -391,8 +391,7 @@ def Association():
                     getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
@@ -402,12 +401,10 @@ def Association():
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
                 while True:
-                    after = input(
-                        "\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
+                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
                     if after == "test":
                         Association()
                     if after == "main":
@@ -416,21 +413,19 @@ def Association():
                         print("\nHave a great day!")
                         break
                     else:
-                        print(
-                            "\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
 
             if wine_choice == "white":
                 try:
                     WineCharX = "quality"
-                    WineCharY = "fixed acidity"
+                    WineCharY = "alcohol"
                     allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
                     white = allWines.loc[allWines['type'] == 'white', :]
 
                     getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
@@ -440,12 +435,10 @@ def Association():
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
                 while True:
-                    after = input(
-                        "\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
+                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
                     if after == "test":
                         Association()
                     if after == "main":
@@ -454,12 +447,10 @@ def Association():
                         print("\nHave a great day!")
                         break
                     else:
-                        print(
-                            "\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
 
             else:
-                print(
-                    "\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+                print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
 
 # Function calls:
