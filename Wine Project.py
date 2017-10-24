@@ -125,7 +125,7 @@ def Registration():
 
     while True:
         city = input("\nEnter the employees's city: ").strip().title()
-        if city():
+        if city:
             break
         else:
             print("\nThe employee's city cannot be left blank and can only contain letters. Please try again.")
