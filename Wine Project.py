@@ -370,6 +370,7 @@ def Association():
                     if after == "quit":
                         print("\nHave a great day!")
                         break
+
                     else:
                         print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
 
