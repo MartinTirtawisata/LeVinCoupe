@@ -1,3 +1,7 @@
+import pandas as pd
+import scipy.stats
+import seaborn
+import matplotlib.pyplot as plt
 import sqlite3
 conn = sqlite3.connect('LeVinEmployee.db')
 
@@ -205,10 +209,6 @@ def Registration():
                 print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
 
 def Association():
-    import pandas as pd
-    import scipy.stats
-    import seaborn
-    import matplotlib.pyplot as plt
 
     print("\n===============================================================================")
     print("a. Volatile Acidity and Wine Quality")
