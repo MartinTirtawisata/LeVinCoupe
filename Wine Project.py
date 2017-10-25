@@ -67,8 +67,8 @@ def Menu():
         #Distribution()
     #if menu_choice == "d":
         #Additional()
-    #if menu_choice == "e":
-        #print("Have a great day!")
+    if menu_choice == "e":
+        print("\nHave a great day!")
 
 
 # Registration
@@ -202,6 +202,7 @@ def Registration():
         after = input("\nWould you like to return to the main menu or quit? Type 'main' or 'quit': ").lower().strip()
         if after == "main":
             Menu()
+            break
         if after == "quit":
             print("\nHave a great day!")
             break
@@ -250,18 +251,7 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
-
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                break
 
             if wine_choice == "white":
                 try:
@@ -284,21 +274,21 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                break
 
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+            if wine_choice != "red" or wine_choice != "white":
+                print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
+        while True:
+            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+            if after == "test":
+                Association()
+                break
+            if after == "main":
+                Menu()
+                break
             else:
-                print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
     if association_choice == "b":
 
@@ -327,18 +317,7 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
-
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                break
 
             if wine_choice == "white":
                 try:
@@ -361,22 +340,21 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                break
 
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
+            if wine_choice != "red" or wine_choice != "white":
+                print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
-
+        while True:
+            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+            if after == "test":
+                Association()
+                break
+            if after == "main":
+                Menu()
+                break
             else:
-                print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
     if association_choice == "c":
 
@@ -404,18 +382,7 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
-
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                break
 
             if wine_choice == "white":
                 try:
@@ -438,21 +405,21 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                break
 
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+            if wine_choice != "red" or wine_choice != "white":
+                print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
+        while True:
+            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+            if after == "test":
+                Association()
+                break
+            if after == "main":
+                Menu()
+                break
             else:
-                print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
     if association_choice == "d":
 
@@ -480,18 +447,7 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
-
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+                break
 
             if wine_choice == "white":
                 try:
@@ -514,21 +470,21 @@ def Association():
 
                 except (KeyError) as e:
                     print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                break
 
-                while True:
-                    after = input("\nWould you like to test more associations, return to the main menu, or quit? Type 'test', 'main', or 'quit': ").lower().strip()
-                    if after == "test":
-                        Association()
-                    if after == "main":
-                        Menu()
-                    if after == "quit":
-                        print("\nHave a great day!")
-                        break
-                    else:
-                        print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
+            if wine_choice != "red" or wine_choice != "white":
+                print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
+        while True:
+            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+            if after == "test":
+                Association()
+                break
+            if after == "main":
+                Menu()
+                break
             else:
-                print("\nYou must type either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
+                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
 
 # Function calls:
@@ -540,7 +496,7 @@ Menu()
 """
 Include this code after every menu option:
     while True:
-        after = input("\nWould you like to return to the main menu or quit? Type 'main' or 'quit': ").lower().strip()
+        after = input("\nWould you like to return to the main menu or quit? Enter 'main' or 'quit': ").lower().strip()
         if after == "main":
             Menu()
         if after == "quit":
