@@ -292,6 +292,7 @@ def Association():
 
     if association_choice == "b":
 
+
         while True:
             wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
