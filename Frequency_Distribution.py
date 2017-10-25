@@ -1,6 +1,3 @@
-import pandas as pd
-import matplotlib.pyplot as plot
-import seaborn
 
 def freq_distribution():
     try:
@@ -38,11 +35,11 @@ def freq_distribution():
             wine_char_value_data_set = red_residual_sugar.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plot.title(wine_char + " value " + str(wine_char_value) + " frequencies by " + wine_char_2)
-            plot.ylabel('Number of wines')
+            plt.title(wine_char + " value " + str(wine_char_value) + " frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
 
-            plot.xticks([0,1,2,3,4,5,6,7,8,9,10])
-            plot.show()
+            plt.xticks([0,1,2,3,4,5,6,7,8,9,10])
+            plt.show()
 
         if wine_type == "white":
             white = all_wines.loc[all_wines['type'] == 'white', :]
@@ -52,13 +49,13 @@ def freq_distribution():
             wine_char_value_data_set = white_residual_sugar.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plot.title(wine_char + " value " + str(wine_char_value) + " frequencies by " + wine_char_2)
-            plot.ylabel('Number of wines')
+            plt.title(wine_char + " value " + str(wine_char_value) + " frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
 
-            plot.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-            plot.show()
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
 
     except (KeyError, ZeroDivisionError) as e:
         print(e)
 
-freq_distribution()
+
