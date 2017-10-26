@@ -1,3 +1,7 @@
+import pandas as pd
+import scipy.stats
+import seaborn
+import matplotlib.pyplot as plt
 
 def association():
 
@@ -271,7 +275,7 @@ def association():
                 Association()
                 break
             if after == "main":
-                Menu()
+                menu()
                 break
             else:
                 print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")

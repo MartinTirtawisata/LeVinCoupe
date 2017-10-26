@@ -1,3 +1,7 @@
+import pandas as pd
+import scipy.stats
+import seaborn
+import matplotlib.pyplot as plt
 
 def freq_distribution():
     try:
