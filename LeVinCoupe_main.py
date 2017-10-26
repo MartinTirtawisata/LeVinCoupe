@@ -10,10 +10,8 @@ from Registration import registration
 from Menu import menu
 conn = sqlite3.connect('LeVinEmployee.db')
 
-
 #-------------------------------------------Beginning of Code---------------------------------------------
 
-# Function Calls
 login()
 
 active = True
