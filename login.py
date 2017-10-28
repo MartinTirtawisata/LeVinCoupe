@@ -5,11 +5,6 @@ def login():
     with conn:
         cur = conn.cursor()
 
-        print("\n===============================================================================")
-        print("                          WELCOME TO LE VIN COUPE")
-        print("                Where wine and quality engineering collide!")
-        print("===============================================================================")
-
         while True:
             print("\nEnter your credentials below to login to the system.")
             userEmail = input("\nPlease enter your email: ").strip()
