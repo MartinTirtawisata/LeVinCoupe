@@ -6,25 +6,31 @@ import matplotlib.pyplot as plt
 def freq_distribution():
     try:
         while True:
-            wine_type = input("please choose 'red' or 'white' wine: ").lower().strip()
+            wine_type = input("\nPlease enter 'red' or 'white' based on the distribution on the wine distribution you wish to see: ").lower().strip()
             if wine_type == "red" or wine_type == "white":
                 break
             else:
-                print("Input invalid. Please choose red or white")
+                print("\nYou must enter either 'red' or 'white' based on which wine you want to see a distribution for. Please try again.")
 
         while True:
-            wine_char = input("what wine characteristic would you like to choose?\
-        \n(residual sugar, alcohol present, fixed acidity, volatile acidity: ").lower().strip()
-            if wine_char == "residual sugar" or wine_char == "alcohol present" or wine_char == "fixed acidity" or wine_char == "volatile acidity":
+            print("\n===============================================================================")
+            print("a. Residual Sugar")
+            print("b. Alcohol Percentage")
+            print("c. Fixed Acidity")
+            print("d. Volatile Acidity")
+            print("===============================================================================")
+
+            wine_char = input("\nPlease select an option of which wine characteristic you would like to see a distribution for (enter the letter):").lower().strip()
+            if wine_char == "a" or wine_char == "b" or wine_char == "c" or wine_char == "d":
                 break
             else:
-                print("Input invalid: Please enter from the available wine characters")
+                print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
 
         while True:
-            wine_char_value = int(input("Please enter a value: "))
+            wine_char_value = int(input("\nPlease enter a value for this characteristic: "))
             # need to figure out what are the min - max values
             if wine_char_value > 5 or wine_char_value == "":
-                print("Input invalid. Please enter a value between 1 - 5")
+                print("\nInput invalid. Please enter a value between 1 - 5")
             else:
                 break
 

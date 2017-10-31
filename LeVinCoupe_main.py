@@ -17,49 +17,33 @@ print("                          WELCOME TO LE VIN COUPE")
 print("                Where wine and quality engineering collide!")
 print("===============================================================================")
 
-print("1) log in")
-print("0 exit ")
-option = int(input("Please choose an option: "))
+login()
 
-if option == 0:
-    print(" Have a nice day! ")
-
-if option == 1:
-    login()
-
-    active = True
-    while active:
-        menu()
-        while True:
-            menu_choice = input("\nPlease select an option from the following (enter the letter): ").lower().strip()
-            if menu_choice == "a" or menu_choice == "b" or menu_choice == "c" or menu_choice == "d" or menu_choice == "e":
-                break
-            else:
-                print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
-
-        if menu_choice == "a":
-            registration()
-            continue
-
-        if menu_choice == "b":
-            association()
-
-        if menu_choice == "c":
-            freq_distribution()
-
-        #if menu_choice == "d":
-            #Additional()
-
-        if menu_choice == "e":
-            active = False
-            print("\nHave a great day!")
+active = True
+while active:
+    menu()
+    while True:
+        menu_choice = input("\nPlease select an option from the following (enter the letter): ").lower().strip()
+        if menu_choice == "a" or menu_choice == "b" or menu_choice == "c" or menu_choice == "d" or menu_choice == "e":
             break
+        else:
+            print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
 
-        # Menu option functions are called within the definition of the menu function.
+    if menu_choice == "a":
+        registration()
 
+    if menu_choice == "b":
+        association()
 
+    if menu_choice == "c":
+        freq_distribution()
 
+    #if menu_choice == "d":
+        #additional()
 
+    if menu_choice == "e":
+        active = False
+        print("\nHave a great day!")
 
 """
 Include this code after every menu option:
