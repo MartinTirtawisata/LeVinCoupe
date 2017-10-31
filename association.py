@@ -2,6 +2,7 @@ import pandas as pd
 import scipy.stats
 import seaborn
 import matplotlib.pyplot as plt
+from Menu import menu
 
 def association():
 
@@ -73,20 +74,7 @@ def association():
             if wine_choice != "red" or wine_choice != "white":
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
-        while True:
-            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
-            if after == "test":
-                Association()
-                break
-            if after == "main":
-                Menu()
-                break
-            else:
-                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
-
     if association_choice == "b":
-
-
         while True:
             wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
@@ -138,20 +126,8 @@ def association():
 
             if wine_choice != "red" or wine_choice != "white":
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
-
-        while True:
-            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
-            if after == "test":
-                Association()
-                break
-            if after == "main":
-                Menu()
-                break
-            else:
-                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
     if association_choice == "c":
-
         while True:
             wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
@@ -203,20 +179,8 @@ def association():
 
             if wine_choice != "red" or wine_choice != "white":
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
-
-        while True:
-            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
-            if after == "test":
-                Association()
-                break
-            if after == "main":
-                Menu()
-                break
-            else:
-                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
 
     if association_choice == "d":
-
         while True:
             wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
@@ -269,13 +233,12 @@ def association():
             if wine_choice != "red" or wine_choice != "white":
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
-        while True:
-            after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
-            if after == "test":
-                Association()
-                break
-            if after == "main":
-                menu()
-                break
-            else:
-                print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")
+    while True:
+        after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+        if after == "test":
+            association()
+            break
+        if after == "main":
+            break
+        else:
+            print("\nYou must enter either 'test' or 'main' based on what you want to do. Please try again.")

@@ -7,6 +7,11 @@ from tkinter import *
 #Creates a window
 root = Tk()
 
+canvas = Canvas(root, width=200, height=100)
+canvas.pack()
+
+black_line = canvas.create_line(0,0,200,50)
+red_line = canvas.create_line(0,100,200,50,fill="red")
 
 
 root.mainloop()
