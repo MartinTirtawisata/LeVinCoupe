@@ -22,8 +22,6 @@ def freq_distribution():
         print("===============================================================================")
 
         wine_char = input("\nPlease select an option (enter the letter): ").lower().strip()
-        if not wine_char == "a" or wine_char == "b" or wine_char == "c" or wine_char == "d":
-            print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
 
         if wine_char == "a":
             wine_char = "residual sugar"
@@ -37,6 +35,9 @@ def freq_distribution():
         if wine_char == "d":
             wine_char = "volatile acidity"
             break
+        else:
+            print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
+
 
     while True:
         wine_type = input("\nPlease enter 'red' or 'white' based on the distribution on the wine distribution you wish to see: ").lower().strip()
