@@ -55,6 +55,7 @@ def freq_distribution():
                     print("\nInput invalid. Please enter a value between 1 - 5")
                 else:
                     break
+
         if wine_char == "alcohol" or wine_char == "fixed acidity" or wine_char == "volatile acidity":
             while True:
                 wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
@@ -76,7 +77,7 @@ def freq_distribution():
             wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plt.title("red wine: " + wine_char + " has the value of " + str(wine_char_value) + " ,frequencies by " + wine_char_2)
+            plt.title("Red Wine: " + wine_char + " has the value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
             plt.ylabel('Number of wines')
 
             plt.xticks([0,1,2,3,4,5,6,7,8,9,10])
@@ -90,13 +91,14 @@ def freq_distribution():
             wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plt.title("white wine: "+ wine_char + " has the value of " + str(wine_char_value) + " ,frequencies by " + wine_char_2)
+            plt.title("White Wine: "+ wine_char + " has the value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
             plt.ylabel('Number of wines')
 
             plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
             plt.show()
 
     except (KeyError, ZeroDivisionError) as e:
+        print("\n")
         print(e)
 
     while True:
