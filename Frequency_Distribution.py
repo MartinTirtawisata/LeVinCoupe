@@ -27,13 +27,16 @@ def freq_distribution():
 
         if wine_char == "a":
             wine_char = "residual sugar"
+            break
         if wine_char == "b":
             wine_char = "alcohol"
+            break
         if wine_char == "c":
             wine_char = "fixed acidity"
+            break
         if wine_char == "d":
             wine_char = "volatile acidity"
-        break
+            break
 
     while True:
         wine_type = input("\nPlease enter 'red' or 'white' based on the distribution on the wine distribution you wish to see: ").lower().strip()
@@ -57,7 +60,7 @@ def freq_distribution():
                 wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
                 print(wine_char_value)
                 # need to figure out what are the min - max values
-                if wine_char_value > 4 or wine_char_value == "":
+                if wine_char_value > 10 or wine_char_value == "":
                     print("\nInput invalid. Please enter a value between 1 - 5")
                 else:
                     break
