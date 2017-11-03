@@ -45,6 +45,11 @@ def freq_distribution():
         else:
             print("\nYou must enter either 'red' or 'white' based on which wine you want to see a distribution for. Please try again.")
 
+    # try:
+    #     while True:
+    #         wine_char_value = int(input("\nPlease enter a value (lower bound): "))
+    #         wine_char_value_2 = int(input("\nPlease enter a value higher than the previous(upper bound): "))
+
     try:
         if wine_char == "residual sugar":
             while True:
@@ -71,8 +76,10 @@ def freq_distribution():
 
         if wine_type == "red":
             red = all_wines.loc[all_wines['type'] == 'red', :]
+            red_range = all_wines.loc[all_wines[]]
 
             red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+            print(red_wine_char)
 
             wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
