@@ -1,8 +1,51 @@
 from tkinter import *
 
+class Application(Frame):
+
+    def checkState():
+        #this prints out the type of data
+        if var.get() == 1:
+            print("checkbox is checked")
+        else:
+            print("not checked")
+
+        def checkClicked(event):
+            print("it's clicked")
+
+        button1 = Button(root, text="Click here")
+        button1.bind("<Button-1>", checkClicked)
+        # binding - is the second method to include functions
+
+        button1.pack()
+
 #Creates a window
 root = Tk()
 
+
+label_email = Label(root, text="Email")
+label_password = Label(root, text="Password")
+button_sign_in = Button(root, text="Sign in")
+
+
+entry_email = Entry(root)
+entry_password = Entry(root)
+
+label_email.grid(row=0, column=0, sticky=E)
+label_password.grid(row=1, column=0, sticky=E)
+#stickey = E as East; stick to the right
+
+entry_email.grid(row=0, column=1)
+entry_password.grid(row=1, column=1)
+button_sign_in.grid(row=2, column=2)
+
+var = IntVar()
+#this is a tkinter variable...??
+
+check = Checkbutton(root, text="Keep me signed in", command=checkState, variable=var) #Remove bracket for function argument
+#command -- is one of the methods
+
+check.grid(row=2, column=0, columnspan=2)
+#column span to take two column
 
 root.mainloop()
 
@@ -10,6 +53,7 @@ root.mainloop()
 '''
 canvas = Canvas(root, width=200, height=100)
 canvas.pack()
+
 
 black_line = canvas.create_line(0,0,200,50)
 red_line = canvas.create_line(0,100,200,50,fill="red")
@@ -62,37 +106,7 @@ button1.bind("<Button-1>",checkClicked)
 
 button1.pack()
 '''
-'''
-----------organizing grid layout and binding functions into layouts
-def checkState():
-    #this prints out the type of data
-    if var.get() == 1:
-        print("checkbox is checked")
-    else:
-        print("not checked")
 
-label_1 = Label(root, text="Name")
-label_2 = Label(root, text="Password")
-
-entry_1 = Entry(root)
-entry_2 = Entry(root)
-
-label_1.grid(row=0, column=0, sticky=E)
-#stickey = E as East; stick to the right
-label_2.grid(row=1, column=0, sticky=E)
-
-entry_1.grid(row=0, column=1)
-entry_2.grid(row=1, column=1)
-
-var = IntVar()
-#this is a tkinter variable...??
-
-check = Checkbutton(root, text="Keep me signed in", command=checkState, variable=var) #Remove bracket for function argument
-#command -- is one of the methods
-
-check.grid(columnspan=2)
-#column span to take two column
-'''
 
 '''
 -------------Widgets------------

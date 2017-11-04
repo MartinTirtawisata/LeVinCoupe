@@ -10,6 +10,8 @@ It works for residual sugar for the values of
 
 Problem #1: Floats; the alcohol, fixed, volatile are in the forms of floats which means values are inconsistent with integer etc
 
+Problem #2: Need to create a range for requirement 4
+
 '''
 def freq_distribution():
 
@@ -37,7 +39,6 @@ def freq_distribution():
             break
         else:
             print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
-
 
     while True:
         wine_type = input("\nPlease enter 'red' or 'white' based on the distribution on the wine distribution you wish to see: ").lower().strip()
@@ -77,7 +78,6 @@ def freq_distribution():
 
         if wine_type == "red":
             red = all_wines.loc[all_wines['type'] == 'red', :]
-
 
             red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
             print(red_wine_char)
