@@ -1,6 +1,6 @@
 from tkinter import *
 
-def Login():
+def t_login():
     global root_login
 
     root_login = Tk()
@@ -20,35 +20,33 @@ def Login():
 
     var = IntVar()
     # this is a tkinter variable...??
-
     check = Checkbutton(root_login, text="Keep me signed in", command=checkState, variable=var)  # Remove bracket for function argument
     # command -- is one of the methods
-
     check.grid(row=2, column=0, columnspan=2)
     # column span to take two column
-
     root_login.mainloop()
 
-def check_login():
-
+def t_check_login():
     root_login.destroy()
-    main_menu()
+    return main_menu()
 
-def checkState():
+def t_checkState():
     #this prints out the type of data
     if var.get() == 1:
         print("checkbox is checked")
     else:
         print("not checked")
 
-def main_menu():
+def t_main_menu():
+    global root_menu
     root_menu = Tk()
     root_menu.title("LeVinCoupe Title")
-    button_A = Button(root_menu, text="Register an Employee")
+
+    button_A = Button(root_menu, text="Register an Employee", command=check_register)
     button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality")
     button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
     button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
-    button_E = Button(root_menu, text="Quit")
+    button_E = Button(root_menu, text="Quit", bg="red")
     button_A.pack()
     button_B.pack()
     button_C.pack()
@@ -56,14 +54,74 @@ def main_menu():
     button_E.pack()
     root_menu.mainloop()
 
-    def menu():
-        print("\n===============================================================================")
-        print("a. Register other employees")
-        print("b. Test wine associations based on characteristic and quality")
-        print("c. Create wine frequency distribution based on value of wine characteristic and wine quality")
-        print("d. Ask additional questions or add features")
-        print("e. Quit")
-        print("=================================================================================")
+def t_check_register():
+    root_menu.destroy()
+    return register()
+
+def t_register():
+    #Need Employee ID, First Name, Last Name,  Address, City, State, Zip Code, Email, Password
+    root_register = Tk()
+    root_register.title("LeVinCoupe Employee Register")
+
+    label_emp_id = Label(root_register, text="Enter Employee ID")
+    label_fname = Label(root_register, text="Enter First Name")
+    label_lname = Label(root_register, text="Enter Last Name")
+    label_address = Label(root_register, text="Enter Address")
+    label_city = Label(root_register, text="Enter City")
+    label_state = Label(root_register, text="Enter State")
+    label_zip_code = Label(root_register, text="Enter Zip Code")
+    label_email = Label(root_register, text="Enter Email")
+    label_password = Label(root_register, text="Enter Password")
+    entry_emp_id = Entry(root_register)
+    entry_fname = Entry(root_register)
+    entry_lname = Entry(root_register)
+    entry_address = Entry(root_register)
+    entry_city = Entry(root_register)
+    entry_state = Entry(root_register)
+    entry_zip_code = Entry(root_register)
+    entry_email = Entry(root_register)
+    entry_password = Entry(root_register)
+
+    label_emp_id.grid(row=0, column=0)
+    label_fname.grid(row=1, column=0)
+    label_lname.grid(row=2, column=0)
+    label_address.grid(row=3, column=0)
+    label_city.grid(row=4, column=0)
+    label_state.grid(row=5, column=0)
+    label_zip_code.grid(row=6, column=0)
+    label_email.grid(row=7, column=0)
+    label_password.grid(row=8, column=0)
+    entry_emp_id.grid(row=0, column=1)
+    entry_fname.grid(row=1, column=1)
+    entry_lname.grid(row=2, column=1)
+    entry_address.grid(row=3, column=1)
+    entry_city.grid(row=4, column=1)
+    entry_state.grid(row=5, column=1)
+    entry_zip_code.grid(row=6, column=1)
+    entry_email.grid(row=7, column=1)
+    entry_password.grid(row=8, column=1)
+
+    button_sign_up = Button(root_register, text="Sign Up")
+    button_sign_up.grid(columnspan=3)
+    root_register.mainloop()
+
+def t_association():
+    global root_association
+    root_association = Tk()
+    root_association.title("LeVinCoupe Association")
+
+    button_a = Button(root_association, text="Volatile Acidity and Wine Quality")
+    button_b = Button(root_association, text="Fixed Acidity and Wine Quality")
+    button_c = Button(root_association, text="Alcohol")
+
+
+
+    print("\n===============================================================================")
+    print("a. Volatile Acidity and Wine Quality")
+    print("b. Fixed Acidity and Wine Quality")
+    print("c. Alcohol and Wine Quality")
+    print("d. Residual Sugar and Wine Quality")
+    print("===============================================================================")
 
 
 
