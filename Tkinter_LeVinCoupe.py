@@ -1,5 +1,11 @@
 from tkinter import *
 
+# (t) in front is to indicate that it is a tkinter function
+# (check) a function that validates
+
+def start_program():
+    t_login()
+
 def t_login():
     global root_login
 
@@ -8,7 +14,7 @@ def t_login():
 
     label_email = Label(root_login, text="Email")
     label_password = Label(root_login, text="Password")
-    button_sign_in = Button(root_login, text="Log in", command=check_login)
+    button_sign_in = Button(root_login, text="Log in", command=t_check_login)
     label_email.grid(row=0, column=0, sticky=E)
     label_password.grid(row=1, column=0, sticky=E)
     button_sign_in.grid(row=2, column=2, sticky=E)
@@ -20,7 +26,7 @@ def t_login():
 
     var = IntVar()
     # this is a tkinter variable...??
-    check = Checkbutton(root_login, text="Keep me signed in", command=checkState, variable=var)  # Remove bracket for function argument
+    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var)  # Remove bracket for function argument
     # command -- is one of the methods
     check.grid(row=2, column=0, columnspan=2)
     # column span to take two column
@@ -28,7 +34,7 @@ def t_login():
 
 def t_check_login():
     root_login.destroy()
-    return main_menu()
+    return t_main_menu()
 
 def t_checkState():
     #this prints out the type of data
@@ -42,8 +48,8 @@ def t_main_menu():
     root_menu = Tk()
     root_menu.title("LeVinCoupe Title")
 
-    button_A = Button(root_menu, text="Register an Employee", command=check_register)
-    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality")
+    button_A = Button(root_menu, text="Register an Employee", command=t_check_register)
+    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_check_association)
     button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
     button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
     button_E = Button(root_menu, text="Quit", bg="red")
@@ -56,7 +62,7 @@ def t_main_menu():
 
 def t_check_register():
     root_menu.destroy()
-    return register()
+    return t_register()
 
 def t_register():
     #Need Employee ID, First Name, Last Name,  Address, City, State, Zip Code, Email, Password
@@ -105,30 +111,45 @@ def t_register():
     button_sign_up.grid(columnspan=3)
     root_register.mainloop()
 
+def t_check_association():
+    root_menu.destroy()
+    t_association()
+
 def t_association():
     global root_association
     root_association = Tk()
     root_association.title("LeVinCoupe Association")
 
-    button_a = Button(root_association, text="Volatile Acidity and Wine Quality")
+    button_a = Button(root_association, text="Volatile Acidity and Wine Quality", command=t_wine_type)
     button_b = Button(root_association, text="Fixed Acidity and Wine Quality")
-    button_c = Button(root_association, text="Alcohol")
+    button_c = Button(root_association, text="Alcohol Percentage and Wine Quality")
+    button_d = Button(root_association, text="Residual Sugar and Wine Quality")
 
+    button_a.pack()
+    button_b.pack()
+    button_c.pack()
+    button_d.pack()
 
+    root_association.mainloop()
 
-    print("\n===============================================================================")
-    print("a. Volatile Acidity and Wine Quality")
-    print("b. Fixed Acidity and Wine Quality")
-    print("c. Alcohol and Wine Quality")
-    print("d. Residual Sugar and Wine Quality")
-    print("===============================================================================")
+def t_wine_type():
+    root_association.destroy()
+
+    root_wine_type = Tk()
+
+    button_red = Button(root_wine_type, text="Red")
+    button_white = Button(root_wine_type, text="White")
+
+    button_red.pack()
+    button_white.pack()
+
+    root_wine_type.mainloop()
 
 
 
 #------------------------Main System-----------------
 
-Login()
-
+start_program()
 
 
 
