@@ -20,7 +20,7 @@ def login():
                     results = cur.fetchall()
 
                     if userEmail == results[0][7] and userPassword == results[0][8]:
-                        print("\nLogin successful")
+                        print("\nLogin successful!")
                         break
                 except:
                     print("\nConnection Failed. You entered a wrong email or password. Please try again.")
