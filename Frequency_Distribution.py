@@ -4,38 +4,45 @@ import seaborn
 import matplotlib.pyplot as plt
 
 '''
-Questions to ask:
-Are the frequency requirements different for every wine characteristic?
-It works for residual sugar for the values of 
-
-Problem #1: Floats; the alcohol, fixed, volatile are in the forms of floats which means values are inconsistent with integer etc
-
-Problem #2: Need to create a range for requirement 4
-
+Max values:
+fixed acidity = 15.9
+volatile acidity = 1.58
+citric acid = 1.66
+residual sugar = 65.8
+chlorides = 0.611
+free sulfur dioxide = 289
+total sulfur dioxide = 440
+density = 1.03898
+pH = 4.01
+sulphates = 2
+alcohol = 14.9
+quality = 9
 '''
+
+
 def freq_distribution():
 
     while True:
         print("\n===============================================================================")
-        print("a. Residual Sugar")
-        print("b. Alcohol Percentage")
-        print("c. Fixed Acidity")
-        print("d. Volatile Acidity")
+        print("a. Volatile Acidity")
+        print("b. Fixed Acidity")
+        print("c. Alcohol")
+        print("d. Residual Sugar")
         print("===============================================================================")
 
         wine_char = input("\nPlease select an option (enter the letter): ").lower().strip()
 
         if wine_char == "a":
-            wine_char = "residual sugar"
+            wine_char = "volatile acidity"
             break
         if wine_char == "b":
-            wine_char = "alcohol"
-            break
-        if wine_char == "c":
             wine_char = "fixed acidity"
             break
+        if wine_char == "c":
+            wine_char = "alcohol"
+            break
         if wine_char == "d":
-            wine_char = "volatile acidity"
+            wine_char = "residual sugar"
             break
         else:
             print("\nYou must select only one menu choice from above by typing the letter. Please try again.")
@@ -47,31 +54,38 @@ def freq_distribution():
         else:
             print("\nYou must enter either 'red' or 'white' based on which wine you want to see a distribution for. Please try again.")
 
-    # try:
-    #     while True:
-    #         wine_char_value = int(input("\nPlease enter a value (lower bound): "))
-    #         wine_char_value_2 = int(input("\nPlease enter a value higher than the previous(upper bound): "))
-
     try:
-        if wine_char == "residual sugar":
-            while True:
-                wine_char_value = int(input("\nPlease enter a value for this characteristic: "))
-                #apparantly the value of 5 is too much for residual sugar for red
-                # need to figure out what are the min - max values
-                if wine_char_value > 4 or wine_char_value == "":
-                    print("\nInput invalid. Please enter a value between 1 - 5")
-                else:
-                    break
-
-        if wine_char == "alcohol" or wine_char == "fixed acidity" or wine_char == "volatile acidity":
+        if wine_char == "volatile acidity":
             while True:
                 wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
-                print(wine_char_value)
-                # need to figure out what are the min - max values
-                if wine_char_value > 10 or wine_char_value == "":
-                    print("\nInput invalid. Please enter a value between 1 - 5")
-                else:
+                if wine_char_value <= 1.58:
                     break
+                else:
+                    print("\nInput invalid. The max value for volatile acidity is 1.58. Please enter a value no greater than this number.")
+
+        if wine_char == "fixed acidity":
+                while True:
+                    wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
+                    if wine_char_value <= 15.9:
+                        break
+                    else:
+                        print("\nInput invalid. The max value for fixed acidity is 15.9. Please enter a value no greater than this number.")
+
+        if wine_char == "alcohol":
+            while True:
+                wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
+                if wine_char_value <= 14.9:
+                    break
+                else:
+                    print("\nInput invalid. The max value for alcohol is 14.9. Please enter a value no greater than this number.")
+
+        if wine_char == "residual sugar":
+            while True:
+                wine_char_value = float(input("\nPlease enter a value for this characteristic: "))
+                if wine_char_value <= 65.8:
+                    break
+                else:
+                    print("\nInput invalid. The max value for residual sugar is 65.8. Please enter a value no greater than this number.")
 
         wine_char_2 = "quality"
         all_wines = pd.read_csv('winequality-both.csv')
@@ -80,12 +94,11 @@ def freq_distribution():
             red = all_wines.loc[all_wines['type'] == 'red', :]
 
             red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
-            print(red_wine_char)
 
             wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plt.title("Red Wine: " + wine_char + " has the value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.title("Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
             plt.ylabel('Number of wines')
 
             plt.xticks([0,1,2,3,4,5,6,7,8,9,10])
@@ -99,7 +112,7 @@ def freq_distribution():
             wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
             seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-            plt.title("White Wine: "+ wine_char + " has the value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.title("White Wine: "+ wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
             plt.ylabel('Number of wines')
 
             plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -110,7 +123,7 @@ def freq_distribution():
         print(e)
 
     while True:
-        after = input("\nWould you like to test more frequency distribution or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+        after = input("\nWould you like to test more frequency distribution or return to the main menu? (enter 'test' or 'main'): ").lower().strip()
         if after == "test":
             freq_distribution()
             break

@@ -6,6 +6,7 @@ import sqlite3
 from Association import association
 from Frequency_Distribution import freq_distribution
 from Login import login
+from Association_UserInput import association_userInput
 
 from Registration import registration
 from Menu import menu
@@ -39,8 +40,8 @@ while active:
     if menu_choice == "c":
         freq_distribution()
 
-    #if menu_choice == "d":
-        #additional()
+    if menu_choice == "d":
+        association_userInput()
 
     if menu_choice == "e":
         active = False
