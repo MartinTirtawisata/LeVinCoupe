@@ -23,7 +23,7 @@ def association():
     if association_choice == "a":
 
         while True:
-            wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
+            wine_choice = input("\nWould you like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
             if wine_choice == "red":
                 try:
@@ -75,8 +75,9 @@ def association():
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
     if association_choice == "b":
+
         while True:
-            wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
+            wine_choice = input("\nWould you like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
             if wine_choice == "red":
                 try:
@@ -128,8 +129,9 @@ def association():
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
     if association_choice == "c":
+
         while True:
-            wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
+            wine_choice = input("\nWould you like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
             if wine_choice == "red":
                 try:
@@ -181,8 +183,9 @@ def association():
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
     if association_choice == "d":
+
         while True:
-            wine_choice = input("\nWould like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
+            wine_choice = input("\nWould you like to test for red or white wine? (enter 'red' or 'white'): ").strip().lower()
 
             if wine_choice == "red":
                 try:
@@ -234,7 +237,7 @@ def association():
                 print("\nYou must enter either 'red' or 'white' based on which wine you want to test associations for. Please try again.")
 
     while True:
-        after = input("\nWould you like to test more associations or return to the main menu? Enter 'test' or 'main': ").lower().strip()
+        after = input("\nWould you like to test more associations or return to the main menu? (enter 'test' or 'main'): ").lower().strip()
         if after == "test":
             association()
             break

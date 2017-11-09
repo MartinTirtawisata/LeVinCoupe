@@ -7,8 +7,6 @@ from Association import association
 from Frequency_Distribution import freq_distribution
 from Login import login
 from Association_UserInput import association_userInput
-
-
 from Registration import registration
 from Menu import menu
 conn = sqlite3.connect('LeVinEmployee.db')
@@ -48,15 +46,3 @@ while active:
         active = False
         print("\nHave a great day!")
 
-"""
-Include this code after every menu option:
-    while True:
-        after = input("\nWould you like to return to the main menu or quit? Enter 'main' or 'quit': ").lower().strip()
-        if after == "main":
-            Menu()
-        if after == "quit":
-            print("\nHave a great day!")
-            break
-        if after != "main" or after != "quit":
-                print("\nYou must type either 'main' or 'quit' based on what you want to do. Please try again.")
-"""

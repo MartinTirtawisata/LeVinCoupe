@@ -28,11 +28,9 @@ def registration():
                 cur.execute("SELECT COUNT (*) FROM Employee WHERE (EmployeeID = '" + empID + "')")
                 results = cur.fetchone()
             print("\nThe employee ID " + empID + " is accepted.")
-            # Add 'return empID' here when you convert registration into function - I don't think we need this but she had it in her example.
         except sqlite3.Error as e:
             print("\n")
             print(e)
-        # empID = idCheck() - I don't think we need this but she had it in her example. Leaving it just in case.
 
     while True:
         firstName = input("\nNext, enter the employee's first name: ").strip().title()
@@ -76,9 +74,7 @@ def registration():
         else:
             print("\nThe employee's zip code cannot be left blank and can only contain a 5 digit number. Please try again.")
 
-    # def emailCheck(): - I don't think we need this but she had it in her example. Leaving it just in case.
     while True:
-        #maybe add restriction that they have to enter a valid email; with @hotmail, or @gmail verified.
         email = input("\nEnter the employee's email: ").strip()
         if email:
             break
@@ -100,14 +96,11 @@ def registration():
             cur.execute("SELECT COUNT (*) FROM Employee WHERE (Email = '" + email + "')")
             results = cur.fetchone()
         print("\nThe employee email " + email + " is accepted.")
-        # Add 'return email' here when you convert registration into function - I don't think we need this but she had it in her example.
     except sqlite3.Error as e:
         print("\n")
         print(e)
-# email = emailCheck() - I don't think we need this but she had it in her example. Leaving it just in case.
 
     while True:
-        #maybe add requirements for password; Atleast a capital? or 5 letters
         password = input("\nEnter a password for the employee account: ")
         if password:
             break
@@ -126,7 +119,7 @@ def registration():
     print("\nEmployee successfully registered!")
 
     while True:
-        after = input("\nWould you like to return to the main menu or register more employees? Enter 'main' or 'register': ").lower().strip()
+        after = input("\nWould you like to return to the main menu or register more employees? (enter 'main' or 'register': ").lower().strip()
         if after == "main":
             break
         if after == "register":
