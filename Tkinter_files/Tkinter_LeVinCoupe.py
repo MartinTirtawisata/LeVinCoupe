@@ -13,27 +13,23 @@ def t_login():
 
     root_login = Tk()
     root_login.title("LeVinCoupe - Login")
+    root_login.geometry('500x300+300+400')
 
-    mainframe = ttk.Frame(root_login, padding="6 6 18 18")
-    mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-    mainframe.columnconfigure(0, weight=1)
-    mainframe.rowconfigure(0, weight=1)
-
-    label_email = Label(mainframe, text="Email")
-    label_password = Label(mainframe, text="Password")
-    button_sign_in = Button(mainframe, text="Log in", command=t_check_login)
+    label_email = Label(root_login, text="Email")
+    label_password = Label(root_login, text="Password")
+    button_sign_in = Button(root_login, text="Log in", command=t_check_login)
     label_email.grid(row=0, column=0, sticky=E)
     label_password.grid(row=1, column=0, sticky=E)
     button_sign_in.grid(row=2, column=2, sticky=E)
 
-    entry_email = Entry(mainframe)
-    entry_password = Entry(mainframe, show='*')
+    entry_email = Entry(root_login)
+    entry_password = Entry(root_login, show='*')
     entry_email.grid(row=0, column=1)
     entry_password.grid(row=1, column=1)
 
     var = IntVar()
     # this is a tkinter variable...??
-    check = Checkbutton(mainframe, text="Keep me signed in", command=t_checkState, variable=var)  # Remove bracket for function argument
+    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var)  # Remove bracket for function argument
     # command -- is one of the methods
     check.grid(row=2, column=0, columnspan=2)
     # column span to take two column
