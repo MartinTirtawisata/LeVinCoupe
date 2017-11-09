@@ -7,6 +7,7 @@ from Association import association
 from Frequency_Distribution import freq_distribution
 from Login import login
 from Association_UserInput import association_userInput
+
 from Registration import registration
 from Menu import menu
 conn = sqlite3.connect('LeVinEmployee.db')
