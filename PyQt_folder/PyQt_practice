@@ -1,51 +1,90 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-def windows():
-    app = QtWidgets.QApplication(sys.argv)
-    w = QtWidgets.QWidget()
-    b = QtWidgets.QPushButton('Push Me')
-    l = QtWidgets.QLabel('Look at me')
 
-    h_box = QtWidgets.QHBoxLayout()
-    h_box.addStretch()
-    h_box.addWidget(l)
-    h_box.addStretch()
+class Window(QtWidgets.QWidget):
 
-    v_box = QtWidgets.QVBoxLayout()
-    v_box.addWidget(b)
-    v_box.addLayout(h_box)
-    w.setLayout(v_box)
+    def __init__(self):
+        super(Window, self).__init__()
+        self.init_ui()
 
-    w.setWindowTitle('LeVinCoupe')
-    w.show()
-    sys.exit(app.exec())
+    def init_ui(self):
+        self.b = QtWidgets.QPushButton('Push Me')
+        self.l = QtWidgets.QLabel('I have not been clicked yet')
 
-windows()
+        h_box = QtWidgets.QHBoxLayout()
+        h_box.addStretch()
+        h_box.addWidget(self.l)
+        h_box.addStretch()
 
+        v_box = QtWidgets.QVBoxLayout()
+        v_box.addWidget(self.b)
+        v_box.addLayout(h_box)
 
+        self.setLayout(v_box)
+        self.setWindowTitle('LeVinCoupe')
 
+        self.b.clicked.connect(self.btn_click)
 
-'''
-def window():
-    app = QtWidgets.QApplication(sys.argv)
-    w = QtWidgets.QWidget()
-    b = QtWidgets.QPushButton(w)
-    l = QtWidgets.QLabel(w)
-    b.setText('Push Me')
-    l.setText('Look at me')
-    w.setWindowTitle('LeVinCoupe')
-    b.move(100,50)
-    l.move(110, 100)
-    # label_2 = QtWidgets.QLabel(w)
-    label_1 = QtWidgets.QLabel(w)
-    label_1.setText('Hello World')
-    # label_2.setPixmap(QtGui.QPixmap('Add Image'))
-    w.setGeometry(100, 100, 300, 200)
-    label_1.move(100,20)
-    w.show()
-    sys.exit(app.exec_())
+        self.show()
+
+    def btn_click(self):
+        self.l.setText('I have been clicked!')
+
+app = QtWidgets.QApplication(sys.argv)
+
+a_window = Window()
+sys.exit(app.exec_())
 
 
-window()
-'''
+#
+# '''
+# def windows():
+#     app = QtWidgets.QApplication(sys.argv)
+#     w = QtWidgets.QWidget()
+#     b = QtWidgets.QPushButton('Push Me')
+#     l = QtWidgets.QLabel('Look at me')
+#
+#     h_box = QtWidgets.QHBoxLayout()
+#     h_box.addStretch()
+#     h_box.addWidget(l)
+#     h_box.addStretch()
+#
+#     v_box = QtWidgets.QVBoxLayout()
+#     v_box.addWidget(b)
+#     v_box.addLayout(h_box)
+#     w.setLayout(v_box)
+#
+#     w.setWindowTitle('LeVinCoupe')
+#     w.show()
+#     sys.exit(app.exec())
+#
+# windows()
+# '''
+#
+#
+#
+#
+# '''
+# def window():
+#     app = QtWidgets.QApplication(sys.argv)
+#     w = QtWidgets.QWidget()
+#     b = QtWidgets.QPushButton(w)
+#     l = QtWidgets.QLabel(w)
+#     b.setText('Push Me')
+#     l.setText('Look at me')
+#     w.setWindowTitle('LeVinCoupe')
+#     b.move(100,50)
+#     l.move(110, 100)
+#     # label_2 = QtWidgets.QLabel(w)
+#     label_1 = QtWidgets.QLabel(w)
+#     label_1.setText('Hello World')
+#     # label_2.setPixmap(QtGui.QPixmap('Add Image'))
+#     w.setGeometry(100, 100, 300, 200)
+#     label_1.move(100,20)
+#     w.show()
+#     sys.exit(app.exec_())
+#
+#
+# window()
+# '''
