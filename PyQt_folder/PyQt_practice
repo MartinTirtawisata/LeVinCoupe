@@ -1,7 +1,120 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QRadioButton, QLabel, QLineEdit, QSlider, QPushButton, QVBoxLayout, QApplication, QWidget, QCheckBox
+from PyQt5.QtCore import Qt
+
+class Window(QWidget):
+
+    def __init__(self):
+        super(Window, self).__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        self.lbl = QLabel()
+        self.chx = QCheckBox('Do you like dogs?')
+        self.btn = QPushButton('Push Me')
+        self.red_w= QRadioButton('Red Wine')
+        self.white_w = QRadioButton('White Wine')
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.lbl)
+        layout.addWidget(self.chx)
+        layout.addWidget(self.btn)
+        layout.addWidget(self.red_w)
+        layout.addWidget(self.white_w)
+
+        self.setLayout(layout)
+
+        self.btn.clicked.connect(lambda: self.btn_click(self.chx.isChecked(), self.lbl))
+        self.btn.toggled.connect(lambda: self.toggled(self.red_w.isChecked(), self.lbl))
+        #toggle : radio button does not work. Research
+
+        self.show()
+
+    def btn_click(self, chk, lbl):
+        if chk:
+            lbl.setText('Great You like Dogs')
+        else:
+            lbl.setText('Dog Hater')
+    def toggled(self, rbtn, lbl):
+        if rbtn:
+            lbl.setText('Red Wine it is')
+        else:
+            lbl.setText('White wine it is')
 
 
+
+
+app = QApplication(sys.argv)
+
+a_window = Window()
+sys.exit(app.exec_())
+
+
+'''
+class Window(QWidget):
+
+    def __init__(self):
+        super(Window, self).__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        self.le = QLineEdit()
+        self.b1 = QPushButton('Clear')
+        self.b2 = QPushButton('Print')
+        self.s1 = QSlider(Qt.Horizontal)
+        self.s1.setMinimum(1)
+        self.s1.setMaximum(99)
+        self.s1.setValue(25)
+        self.s1.setTickInterval(10)
+        self.s1.setTickPosition(QSlider.TicksBelow)
+
+        v_box = QVBoxLayout()
+        v_box.addWidget(self.le)
+        v_box.addWidget(self.b1)
+        v_box.addWidget(self.b2)
+        v_box.addWidget(self.s1)
+
+        self.setLayout(v_box)
+        self.setWindowTitle('LeVinCoupe')
+
+        self.b1.clicked.connect(lambda: self.btn_click(self.b1, 'Hello from Clear'))
+        self.b2.clicked.connect(lambda: self.btn_click(self.b2, 'Hello from Print'))
+        self.s1.valueChanged.connect(self.v_change)
+
+
+        # self.b1.clicked.connect(self.btn_click)
+        # self.b2.clicked.connect(self.btn_click)
+
+        self.show()
+
+    def btn_click(self, b, string):
+        if b.text() == 'Print':
+            print(self.le.text())
+        else:
+            self.le.clear()
+        print(string)
+
+
+        # sender = self.sender()
+        # if sender.text() == 'Print':
+        #     print(self.le.text())
+        # else:
+        #     self.le.clear()
+
+    def v_change(self):
+        my_value = str(self.s1.value())
+        self.le.setText(my_value)
+
+
+
+
+app = QApplication(sys.argv)
+
+a_window = Window()
+sys.exit(app.exec_())
+'''
+
+'''
 class Window(QtWidgets.QWidget):
 
     def __init__(self):
@@ -35,7 +148,7 @@ app = QtWidgets.QApplication(sys.argv)
 
 a_window = Window()
 sys.exit(app.exec_())
-
+'''
 
 #
 # '''
