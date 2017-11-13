@@ -12,6 +12,17 @@ from Registration import registration
 from Menu import menu
 conn = sqlite3.connect('LeVinEmployee.db')
 
+'''
+Additional Features (include this in dropbox as a separate file):
+-Association with ability for user inputted characteristics (option d in our menu)
+-Printed min and max value for user chosen characteristic in frequency distribution and prompted a user to enter a value within the range
+-Alerting users to values that are more than 2 SDs from the mean for their chosen characteristic and inputted value for frequency distribution
+                        -Min/Max and Mean/SD values for all characteristics are listed at the top of the Frequency_Distribution file
+-Blending recommendations for the frequency distribution if user inputted outlier values for their chosen characteristic (clarify what checks there are and where at in the code)
+                            -Blending recommendation if user enters a min or max value for a characteristic
+                            -Blending recommendation for GOV STANDARD OF VOLATILE ACIDITY
+-GUI
+'''
 
 #-------------------------------------------Beginning of Code---------------------------------------------
 print("\n===============================================================================")

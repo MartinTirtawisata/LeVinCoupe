@@ -18,6 +18,12 @@ sulphates = 2
 alcohol = 14.9
 quality = 9
 
+Min Values:
+fixed acidity = 3.8
+volatile acidity = 0.08
+residual sugar = 0.6
+alcohol = 8
+
 Volatile Acidity:   Mean = 0.339666     SD = 0.164636474        Two SDs from Mean = 0.668938
 Fixed Acidity:      Mean = 7.215307065  SD = 1.296433758        Two SDs from Mean = 9.808175
 Alcohol:            Mean = 10.49180083  SD = 1.192711749        Two SDs from Mean = 12.877224
@@ -62,52 +68,48 @@ def freq_distribution():
     try:
         if wine_char == "volatile acidity":
             while True:
-                wine_char_value = float(input("\nEnter a numerical value for this characteristic: "))
-                if wine_char_value > 1.58 or wine_char_value == "":
-                    print("\nThe max value for volatile acidity out of all wines is 1.58. Please enter a value no greater than this number.")
+                print("\nFor all wines, the minimum value for volatile acidity is 0.08 and the max value is 1.58.")
+                wine_char_value = float(input("\nEnter a numerical value for this characteristic within the given range (including lower and upper limits): "))
+                if wine_char_value > 1.58 or wine_char_value < 0.08 or wine_char_value == "":
+                    print("\nPlease enter a value within the given range (including lower and upper limits) for volatile acidity.")
                 elif wine_char_value > 0.668938:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
-                elif wine_char_value == 0 or wine_char_value < 0:
-                    print("\nPlease enter a value that is greater than 0.")
                 else:
                     break
 
         if wine_char == "fixed acidity":
             while True:
-                wine_char_value = float(input("\nEnter a numerical value for this characteristic: "))
-                if wine_char_value > 15.9 or wine_char_value == "":
-                    print("\nThe max value for fixed acidity out of all wines is 15.9. Please enter a value no greater than this number.")
+                print("\nFor all wines, the minimum value for fixed acidity is 3.8 and the max value is 15.9.")
+                wine_char_value = float(input("\nEnter a numerical value for this characteristic within the given range (including lower and upper limits): "))
+                if wine_char_value > 15.9 or wine_char_value < 3.8 or wine_char_value == "":
+                    print("\nPlease enter a value within the given range (including lower and upper limits) for fixed acidity.")
                 elif wine_char_value > 9.808175:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean fixed acidity for all wines.")
                     break
-                elif wine_char_value == 0 or wine_char_value < 0:
-                    print("\nPlease enter a value that is greater than 0.")
                 else:
                     break
 
         if wine_char == "alcohol":
             while True:
-                wine_char_value = float(input("\nEnter a numerical value for this characteristic: "))
-                if wine_char_value > 14.9 or wine_char_value == "":
-                    print("\nThe max value for alcohol percentage out of all wines is 14.9. Please enter a value no greater than this number.")
+                print("\nFor all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9.")
+                wine_char_value = float(input("\nEnter a numerical value for this characteristic within the given range (including lower and upper limits): "))
+                if wine_char_value > 14.9 or wine_char_value < 8 or wine_char_value == "":
+                    print("\nPlease enter a value within the given range (including lower and upper limits) for alcohol percentage.")
                 elif wine_char_value > 12.877224:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean alcohol percentage for all wines.")
                     break
-                elif wine_char_value == 0 or wine_char_value < 0:
-                    print("\nPlease enter a value that is greater than 0.")
                 else:
                     break
 
         if wine_char == "residual sugar":
             while True:
-                wine_char_value = float(input("\nEnter a numerical value for this characteristic: "))
-                if wine_char_value > 65.8 or wine_char_value == "":
-                    print("\nThe max value for residual sugar out of all wines is 65.8. Please enter a value no greater than this number.")
+                print("\nFor all wines, the minimum value for residual sugar is 0.6 and the max value is 65.8.")
+                wine_char_value = float(input("\nEnter a numerical value for this characteristic within the given range (including lower and upper limits): "))
+                if wine_char_value > 65.8 or wine_char_value < 0.6 or wine_char_value == "":
+                    print("\nPlease enter a value within the given range (including lower and upper limits) for residual sugar.")
                 elif wine_char_value > 14.958843:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean residual sugar for all wines.")
                     break
-                elif wine_char_value == 0 or wine_char_value < 0:
-                    print("\nPlease enter a value that is greater than 0.")
                 else:
                     break
 
