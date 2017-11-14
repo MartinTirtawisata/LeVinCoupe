@@ -1,270 +1,88 @@
 from tkinter import *
-from tkinter import ttk
+import tkinter.messagebox as tm
+import sqlite3
 
-# (t) in front is to indicate that it is a tkinter function
-# (check) a function that validates
+class Login(Frame):
 
-def start_program():
-    t_login()
+    db_name = 'LeVinEmployee.db'
 
-def t_login():
-    global root_login
-    global mainframe
+    def __init__(self, master):
+        super().__init__(master)
 
-    root_login = Tk()
-    root_login.title("LeVinCoupe - Login")
-    root_login.geometry('500x300+300+400')
+        self.ue_label = Label(self, text="Username")
+        self.pw_label = Label(self, text="Password")
 
-    label_email = Label(root_login, text="Email")
-    label_password = Label(root_login, text="Password")
-    button_sign_in = Button(root_login, text="Log in", command=t_check_login)
-    label_email.grid(row=0, column=0, sticky=E)
-    label_password.grid(row=1, column=0, sticky=E)
-    button_sign_in.grid(row=2, column=2, sticky=E)
+        self.userEmail = Entry(self)
+        self.userPassword = Entry(self, show="*")
 
-    entry_email = Entry(root_login)
-    entry_password = Entry(root_login, show='*')
-    entry_email.grid(row=0, column=1)
-    entry_password.grid(row=1, column=1)
+        self.ue_label.grid(row=0, sticky=E)
+        self.pw_label.grid(row=1, sticky=E)
+        self.userEmail.grid(row=0, column=1)
+        self.userPassword.grid(row=1, column=1)
 
-    var = IntVar()
-    # this is a tkinter variable...??
-    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var)  # Remove bracket for function argument
-    # command -- is one of the methods
-    check.grid(row=2, column=0, columnspan=2)
-    # column span to take two column
-    root_login.mainloop()
+        self.checkbox = Checkbutton(self, text="Keep me logged in")
+        self.checkbox.grid(columnspan=2)
 
-def t_check_login():
-    root_login.destroy()
-    return t_main_menu()
+        self.logbtn = Button(self, text="Login", command=self._login_btn_clicked())
+        self.logbtn.grid(columnspan=2)
 
-def t_checkState():
-    #this prints out the type of data
-    if var.get() == 1:
-        print("checkbox is checked")
-    else:
-        print("not checked")
+        self.pack()
 
-def t_main_menu():
-    global root_menu
-    root_menu = Tk()
-    root_menu.title("LeVinCoupe Title")
+    def _login_btn_clicked(self, parameters=()):
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
 
-    button_A = Button(root_menu, text="Register an Employee", command=t_check_register)
-    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_check_association)
-    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
-    button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
-    button_E = Button(root_menu, text="Quit", bg="red")
-    button_A.pack()
-    button_B.pack()
-    button_C.pack()
-    button_D.pack()
-    button_E.pack()
-    root_menu.mainloop()
+            query = "SELECT * FROM Employee WHERE(Email = '" + str(self.userEmail) + "') AND (Password = '" + str(self.userPassword) + "')"
+            cursor.execute(query, parameters)
+            query_result = cursor.fetchall()
 
-def t_check_register():
-    root_menu.destroy()
-    return t_register()
+        return
 
-def t_register():
-    #Need Employee ID, First Name, Last Name,  Address, City, State, Zip Code, Email, Password
-    root_register = Tk()
-    root_register.title("LeVinCoupe Employee Register")
 
-    label_emp_id = Label(root_register, text="Enter Employee ID")
-    label_fname = Label(root_register, text="Enter First Name")
-    label_lname = Label(root_register, text="Enter Last Name")
-    label_address = Label(root_register, text="Enter Address")
-    label_city = Label(root_register, text="Enter City")
-    label_state = Label(root_register, text="Enter State")
-    label_zip_code = Label(root_register, text="Enter Zip Code")
-    label_email = Label(root_register, text="Enter Email")
-    label_password = Label(root_register, text="Enter Password")
-    entry_emp_id = Entry(root_register)
-    entry_fname = Entry(root_register)
-    entry_lname = Entry(root_register)
-    entry_address = Entry(root_register)
-    entry_city = Entry(root_register)
-    entry_state = Entry(root_register)
-    entry_zip_code = Entry(root_register)
-    entry_email = Entry(root_register)
-    entry_password = Entry(root_register)
+        # print("Clicked")
+        userEmail = self.userEmail.get()
+        userPassword = self.userPassword.get()
 
-    label_emp_id.grid(row=0, column=0)
-    label_fname.grid(row=1, column=0)
-    label_lname.grid(row=2, column=0)
-    label_address.grid(row=3, column=0)
-    label_city.grid(row=4, column=0)
-    label_state.grid(row=5, column=0)
-    label_zip_code.grid(row=6, column=0)
-    label_email.grid(row=7, column=0)
-    label_password.grid(row=8, column=0)
-    entry_emp_id.grid(row=0, column=1)
-    entry_fname.grid(row=1, column=1)
-    entry_lname.grid(row=2, column=1)
-    entry_address.grid(row=3, column=1)
-    entry_city.grid(row=4, column=1)
-    entry_state.grid(row=5, column=1)
-    entry_zip_code.grid(row=6, column=1)
-    entry_email.grid(row=7, column=1)
-    entry_password.grid(row=8, column=1)
+        # print(username, password)
 
-    button_sign_up = Button(root_register, text="Sign Up")
-    button_sign_up.grid(columnspan=3)
-    root_register.mainloop()
-
-def t_check_association():
-    root_menu.destroy()
-    t_association()
-
-def t_association():
-    global root_association
-    root_association = Tk()
-    root_association.title("LeVinCoupe Association")
-
-    button_a = Button(root_association, text="Volatile Acidity and Wine Quality", command=t_wine_type)
-    button_b = Button(root_association, text="Fixed Acidity and Wine Quality")
-    button_c = Button(root_association, text="Alcohol Percentage and Wine Quality")
-    button_d = Button(root_association, text="Residual Sugar and Wine Quality")
-
-    button_a.pack()
-    button_b.pack()
-    button_c.pack()
-    button_d.pack()
-
-    root_association.mainloop()
-
-def t_wine_type():
-    root_association.destroy()
-
-    root_wine_type = Tk()
-
-    button_red = Button(root_wine_type, text="Red")
-    button_white = Button(root_wine_type, text="White")
-
-    button_red.pack()
-    button_white.pack()
-
-    root_wine_type.mainloop()
+        if userEmail == self.query_result[0][7] and userPassword == self.query_result[0][8]:
+            tm.showinfo("Login info", "Welcome" + userEmail)
+        else:
+            tm.showerror("Login error", "Incorrect username")
 
 
 
-#------------------------Main System-----------------
-
-start_program()
-
-
-
-'''
-def checkClicked(event):
-        print("it's clicked")
-
-    button1 = Button(root, text="Click here")
-    button1.bind("<Button-1>", checkClicked)
-    # binding - is the second method to include functions
-
-    button1.pack()
-
-'''
-'''
-canvas = Canvas(root, width=200, height=100)
-canvas.pack()
-
-
-black_line = canvas.create_line(0,0,200,50)
-red_line = canvas.create_line(0,100,200,50,fill="red")
-'''
-'''
-----using a class to create an event-------
-class LearningGUI:
-
-    def __init__(self,master):
-        frame = Frame(master)
-        frame.pack()
-
-        self.printButton = Button(master, text="printing message", command=self.printMessage)
-
-        self.quitButton = Button(master, text="Quit", command=master.quit) # master.quit is a tkinter built in method
-
-        self.printButton.pack(side=LEFT)
-        self.quitButton.pack(side=LEFT)
-
-    def printMessage(self):
-        print("wow this works")
-
-'''
-
-'''
------Creating mouseclick events----
-def leftClick(event):
-    print("Left")
-
-def rightClick(event):
-    print("Right")
-
-def middleClick(event):
-    print("MiddleScroll")
-
-frame = Frame(root, width=300, height=250)
-frame.bind("<Button-1>", leftClick)
-frame.bind("<Button-3>", rightClick)
-frame.bind("<Button-3>", middleClick)
-frame.pack()
-'''
-
-'''
-------using event binding to include button & function ----
-def checkClicked(event):
-    print("it's clicked")
-button1 = Button(root, text="Click here")
-button1.bind("<Button-1>",checkClicked)
-#binding - is the second method to include functions
-
-button1.pack()
-'''
-
-
-'''
--------------Widgets------------
-one = Label(root,text="One",fg="white",bg="black")
-# fg = floor ground (font), bg = background
-one.pack()
-two = Label(root,text="Two",fg="black",bg="yellow")
-two.pack(fill=X)
-#fill the background color into X axis direction; horizontal
-three = Label(root,text="Three",fg="green",bg="purple")
-three.pack(side=LEFT, fill=Y)
-four = Label(root,text="Four",fg="green",bg="purple")
-four.pack(fill=BOTH, expand=True)
-#for expanding both Y and X direction
-
-'''
+# cur.execute("SELECT * FROM Employee WHERE(Email = '" + userEmail + "') AND (Password = '" + userPassword + "')")
+#
+#                     results = cur.fetchall()
+#
+#                     if userEmail == results[0][7] and userPassword == results[0][8]:
+#                         print("\nLogin successful!")
+#                         break
+#                 except:
+#                     print("\nConnection Failed. You entered a wrong email or password. Please try again.")
 
 
 
-''' Frames: something of a rectangle; panes'''
-'''
-How to organize frames
-topFrame = Frame(root)
-topFrame.pack()
-#pack is always used if we want it to include inside the window
+class Main_Menu(Frame):
 
-bottomFrame = Frame(root)
-bottomFrame.pack(side=BOTTOM)
+    def __init__(self, master):
+        self.button_A = Button(root_menu, text="Register an Employee", command=t_check_register)
+        self.button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_check_association)
+        self.button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
+        self.button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
+        self.button_E = Button(root_menu, text="Quit", bg="red")
+        self.button_A.pack()
+        self.button_B.pack()
+        self.button_C.pack()
+        self.button_D.pack()
+        self.button_E.pack()
 
-button1 = Button(topFrame, text="Button 1", fg="red")
-button2 = Button(topFrame, text="Button 2", fg="blue")
-button3 = Button(topFrame, text="Button 3", fg="green")
-button4 = Button(bottomFrame, text="Button 4", fg="purple")
-#the argument for the button: (Where do you want it, the text of it, and color of button
-
-button1.pack(side=LEFT)
-button2.pack(side=LEFT)
-button3.pack(side=LEFT)
-button4.pack(side=BOTTOM)
-'''
+    def t_check_register():
+        root_menu.destroy()
+        return t_register()
 
 
-
-
+root = Tk()
+Login(root)
+root.mainloop()
