@@ -74,6 +74,7 @@ def freq_distribution():
                     print("\nPlease enter a value within the given range (including lower and upper limits) for volatile acidity.")
                 elif wine_char_value > 0.668938:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
+                    break
                 else:
                     break
 
