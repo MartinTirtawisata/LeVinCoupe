@@ -2,6 +2,8 @@ from tkinter import *
 import tkinter.messagebox as tm
 import sqlite3
 
+
+
 # (t) in front is to indicate that it is a tkinter function
 # (check) a function that validates
 def start_program():
@@ -50,7 +52,7 @@ def t_check_login():
     except (KeyError) as e:
         print(e)
 
-    if userEmail == query_result[0][7] and userPassword == query_result[0][8]:
+    if userEmail == query_result[7] and userPassword == query_result[8]:
         root_login.destroy()
         return t_main_menu()
 
