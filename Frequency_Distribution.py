@@ -76,12 +76,12 @@ def freq_distribution():
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
                     print("\nAlso, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau.")
                     print("For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12")
-                    print("It is recommended that blend an amount of volatile acidity no greater than the federally regulated limit.")
+                    print("It is recommended that blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
                     break
                 elif (wine_type == "red" and wine_char_value > 0.14) or (wine_type == "white" and wine_char_value > 0.12):
                     print("\nNOTE: The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau.")
                     print("For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12")
-                    print("It is recommended that blend an amount of volatile acidity no greater than the federally regulated limit.")
+                    print("It is recommended that blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
                     break
                 else:
                     break
@@ -121,12 +121,12 @@ def freq_distribution():
                 if wine_char_value > 65.8 or wine_char_value < 0.6 or wine_char_value == "":
                     print("\nPlease enter a value within the given range (including lower and upper limits) for residual sugar.")
                 elif wine_char_value < 4:
-                    print("\nNOTE: It is recommended you enter a value of 4 or greater for residual sugar so your wine has some sweetness.")
+                    print("\nNOTE: It is recommended you enter a value of 4 or greater for residual sugar so that your wine has some sweetness.")
                     print("If a wine has a low value for residual sugar, it is recommended that you DO NOT blend it with a dry wine.")
                     break
                 elif wine_char_value >= 20:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean residual sugar for all wines.")
-                    print("Since this is a high value for residual sugar, it is recommended you blend this wine with a dryer wine to balance out the taste.")
+                    print("Since this is a high value for residual sugar, it is recommended you blend this wine with a dryer wine to balance out the overall taste.")
                     break
                 elif wine_char_value > 14.958843:
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean residual sugar for all wines.")
