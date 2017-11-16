@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter.messagebox as tm
 import sqlite3
 
-
+#import matplotlib, Matplotlib(TkAgg),
 
 # (t) in front is to indicate that it is a tkinter function
 # (check) a function that validates
@@ -15,6 +15,7 @@ def t_login():
     global mainframe
     global entry_email
     global entry_password
+    global var
 
     root_login = Tk()
     root_login.title("LeVinCoupe - Login")
@@ -32,9 +33,9 @@ def t_login():
     entry_email.grid(row=0, column=1)
     entry_password.grid(row=1, column=1)
 
-    var = IntVar()
+    var_check_login = IntVar()
     # this is a tkinter variable...??
-    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var)  # Remove bracket for function argument
+    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var_check_login)  # Remove bracket for function argument
     # command -- is one of the methods
     check.grid(row=2, column=0, columnspan=2)
     # column span to take two column
@@ -60,8 +61,9 @@ def t_check_login():
 
 def t_checkState():
     #this prints out the type of data
-    if var.get() == 1:
+    if var_check_login.get() == 1:
         print("checkbox is checked")
+        print(var_check_login)
     else:
         print("not checked")
 
@@ -71,8 +73,8 @@ def t_main_menu():
     root_menu = Tk()
     root_menu.title("LeVinCoupe Title")
 
-    button_A = Button(root_menu, text="Register an Employee", command=t_check_register)
-    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_check_association)
+    button_A = Button(root_menu, text="Register an Employee", command=t_menu_register)
+    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
     button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
     button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
     button_E = Button(root_menu, text="Quit", bg="red")
@@ -84,7 +86,7 @@ def t_main_menu():
     root_menu.mainloop()
 
 #------------------------------------------------REGISTER---------------------------------------
-def t_check_register():
+def t_menu_register():
     root_menu.destroy()
     return t_register()
 
@@ -147,11 +149,11 @@ def t_register():
     entry_password = Entry(root_register)
     entry_password.grid(row=8, column=1)
 
-    button_sign_up = Button(root_register, text="Sign Up", command=t_check_registration)
+    button_sign_up = Button(root_register, text="Sign Up", command=t_insert_registration)
     button_sign_up.grid(columnspan=3)
     root_register.mainloop()
 
-def t_check_registration():
+def t_insert_registration():
 
     userEmp_id = entry_emp_id.get()
     userF_name = str(entry_fname.get())
@@ -174,46 +176,52 @@ def t_check_registration():
         print(e)
 
 
+#------------------------------------ASSOCIATION--------------------------------------------------------
 
-
-
-
-
-
-
-def t_check_association():
+def t_menu_association():
     root_menu.destroy()
     t_association()
 
 def t_association():
     global root_association
+    global var_wine_char
+    global var_wine_type
+
     root_association = Tk()
     root_association.title("LeVinCoupe Association")
 
-    button_a = Button(root_association, text="Volatile Acidity and Wine Quality", command=t_wine_type)
-    button_b = Button(root_association, text="Fixed Acidity and Wine Quality")
-    button_c = Button(root_association, text="Alcohol Percentage and Wine Quality")
-    button_d = Button(root_association, text="Residual Sugar and Wine Quality")
+    var_wine_char = IntVar()
+    var_wine_type = StringVar()
+    var_wine_type.set('red')
 
+    button_a = Radiobutton(root_association, text="Volatile Acidity and Wine Quality", variable=var_wine_char, value=1, command=t_select_wine_char)
     button_a.pack()
+
+    button_b = Button(root_association, text="Fixed Acidity and Wine Quality")
     button_b.pack()
+
+    button_c = Button(root_association, text="Alcohol Percentage and Wine Quality")
     button_c.pack()
+
+    button_d = Button(root_association, text="Residual Sugar and Wine Quality")
     button_d.pack()
+
+    button_red = Radiobutton(root_association, text="Red", variable=var_wine_type, command=t_select_wine_char)
+    button_red.pack()
+
+    button_white = Button(root_association, text="White")
+    button_white.pack()
 
     root_association.mainloop()
 
-def t_wine_type():
-    root_association.destroy()
+def t_select_wine_char():
+    if var_wine_char.get() == 1:
+        print(var_wine_char)
 
-    root_wine_type = Tk()
+    if var_wine_type.get() == "red":
+        print(var_wine_type)
 
-    button_red = Button(root_wine_type, text="Red")
-    button_white = Button(root_wine_type, text="White")
 
-    button_red.pack()
-    button_white.pack()
-
-    root_wine_type.mainloop()
 
 
 
