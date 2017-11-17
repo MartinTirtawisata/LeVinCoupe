@@ -76,7 +76,7 @@ def freq_distribution():
                     print("\nALERT: The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
                     print("\nAlso, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau.")
                     print("For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12")
-                    print("It is recommended that blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
+                    print("It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
                     break
                 elif (wine_type == "red" and wine_char_value > 0.14) or (wine_type == "white" and wine_char_value > 0.12):
                     print("\nNOTE: The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau.")
