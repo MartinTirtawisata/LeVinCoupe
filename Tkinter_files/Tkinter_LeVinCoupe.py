@@ -88,7 +88,7 @@ def t_main_menu():
 
     button_A = Button(root_menu, text="Register an Employee", command=t_menu_register)
     button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
-    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality")
+    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
     button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
     button_E = Button(root_menu, text="Quit", bg="red")
     button_A.pack()
@@ -193,7 +193,7 @@ def t_insert_registration():
 
 def t_menu_association():
     root_menu.destroy()
-    t_association()
+    return t_association()
 
 def t_association():
     global root_association
@@ -225,12 +225,12 @@ def t_association():
     button_white = Radiobutton(root_association, text="White", variable=var_wine_type, value=9)
     button_white.pack()
 
-    button_enter = Button(root_association, text="Submit", command=t_select_wine_char)
+    button_enter = Button(root_association, text="Submit", command=t_association_result)
     button_enter.pack()
 
     root_association.mainloop()
 
-def t_select_wine_char():
+def t_association_result():
     if var_wine_char.get() == 1:
         if var_wine_type.get() == 8:
             print(var_wine_char)
@@ -274,7 +274,7 @@ def t_select_wine_char():
                 pValue = str(getCorr[1])
                 print(
                     "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
-                print("With p-value of: " + pValclearue)
+                print("With p-value of: " + pValue)
 
                 seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
                 plt.xlabel(WineCharX)
@@ -396,60 +396,60 @@ def t_select_wine_char():
                 print(
                     "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 #---------------------------------------------------RESIDUAL SUGAR -----------------------------------------------
-if var_wine_char.get() == 4:
-    if var_wine_type.get() == 8:
-        print(var_wine_char)
-        print(var_wine_type)
+    if var_wine_char.get() == 4:
+        if var_wine_type.get() == 8:
+            print(var_wine_char)
+            print(var_wine_type)
 
-        try:
-            WineCharX = "quality"
-            WineCharY = "residual sugar"
-            allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
-            red = allWines.loc[allWines['type'] == 'red', :]
+            try:
+                WineCharX = "quality"
+                WineCharY = "residual sugar"
+                allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                red = allWines.loc[allWines['type'] == 'red', :]
 
-            getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
-            correlation = str(getCorr[0])
-            pValue = str(getCorr[1])
-            print(
-                "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
-            print("With p-value of: " + pValue)
+                getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                correlation = str(getCorr[0])
+                pValue = str(getCorr[1])
+                print(
+                    "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                print("With p-value of: " + pValue)
 
-            seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
-            plt.xlabel(WineCharX)
-            plt.ylabel(WineCharY)
-            plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
-            plt.show()
+                seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                plt.xlabel(WineCharX)
+                plt.ylabel(WineCharY)
+                plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                plt.show()
 
-        except (KeyError) as e:
-            print(
-                "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+            except (KeyError) as e:
+                print(
+                    "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
-    if var_wine_type.get() == 9:
-        print(var_wine_char)
-        print(var_wine_type)
+        if var_wine_type.get() == 9:
+            print(var_wine_char)
+            print(var_wine_type)
 
-        try:
-            WineCharX = "quality"
-            WineCharY = "residual sugar"
-            allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
-            white = allWines.loc[allWines['type'] == 'white', :]
+            try:
+                WineCharX = "quality"
+                WineCharY = "residual sugar"
+                allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                white = allWines.loc[allWines['type'] == 'white', :]
 
-            getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
-            correlation = str(getCorr[0])
-            pValue = str(getCorr[1])
-            print(
-                "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
-            print("With p-value of: " + pValue)
+                getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                correlation = str(getCorr[0])
+                pValue = str(getCorr[1])
+                print(
+                    "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                print("With p-value of: " + pValue)
 
-            seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
-            plt.xlabel(WineCharX)
-            plt.ylabel(WineCharY)
-            plt.title("White Wine: " + WineCharX + " X " + WineCharY)
-            plt.show()
+                seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                plt.xlabel(WineCharX)
+                plt.ylabel(WineCharY)
+                plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                plt.show()
 
-        except (KeyError) as e:
-            print(
-                "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+            except (KeyError) as e:
+                print(
+                    "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
 
             # f = Figure(figsize=(5, 5), dpi=100)
@@ -460,6 +460,250 @@ if var_wine_char.get() == 4:
 # canvas = FigureCanvasTkAgg(f, master=root_association)
 # canvas.show()
 # canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+#------------------------------------------------FREQUENCY DISTRIBUTOIN-----------------------
+
+def t_menu_freq_distribution():
+    root_menu.destroy()
+    return t_freq_distribution()
+
+def t_freq_distribution():
+    global freq_dist_value
+    global fd_var_wine_char
+    global fd_var_wine_type
+
+
+    root_freq_dist = Tk()
+    root_freq_dist.title("LeVinCoupe Frequency Distribution")
+
+    #users will choose wine characteristics
+    #users will choose wine type
+    #users will enter a value
+
+    fd_var_wine_char = IntVar()
+    fd_var_wine_type = IntVar()
+
+    button_a = Radiobutton(root_freq_dist, text="Volatile Acidity and Wine Quality", variable=fd_var_wine_char, value=1)
+    button_a.pack()
+
+    button_b = Radiobutton(root_freq_dist, text="Fixed Acidity and Wine Quality", variable=fd_var_wine_char, value=2)
+    button_b.pack()
+
+    button_c = Radiobutton(root_freq_dist, text="Alcohol Percentage and Wine Quality", variable=fd_var_wine_char,
+                           value=3)
+    button_c.pack()
+
+    button_d = Radiobutton(root_freq_dist, text="Residual Sugar and Wine Quality", variable=fd_var_wine_char, value=4)
+    button_d.pack()
+
+    button_red = Radiobutton(root_freq_dist, text="Red", variable=fd_var_wine_type, value=8)
+    button_red.pack()
+
+    button_white = Radiobutton(root_freq_dist, text="White", variable=fd_var_wine_type, value=9)
+    button_white.pack()
+
+    freq_dist_value = Entry(root_freq_dist)
+    freq_dist_value.pack()
+
+    button_enter = Button(root_freq_dist, text="Submit", command=t_freq_dist_result)
+    button_enter.pack()
+
+
+    root_freq_dist.mainloop()
+
+def t_freq_dist_result():
+    if fd_var_wine_char.get() == 1:
+        wine_char = "volatile acidity"
+
+        if fd_var_wine_type.get() == 8:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            red = all_wines.loc[all_wines['type'] == 'red', :]
+
+            red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+        if fd_var_wine_type.get() == 9:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            white = all_wines.loc[all_wines['type'] == 'white', :]
+
+            white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "White Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+    if fd_var_wine_char.get() == 2:
+        wine_char = "fixed acidity"
+
+        if fd_var_wine_type.get() == 8:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            red = all_wines.loc[all_wines['type'] == 'red', :]
+
+            red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+        if fd_var_wine_type.get() == 9:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            white = all_wines.loc[all_wines['type'] == 'white', :]
+
+            white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "White Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+    if fd_var_wine_char.get() == 3:
+        wine_char = "alcohol"
+
+        if fd_var_wine_type.get() == 8:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            red = all_wines.loc[all_wines['type'] == 'red', :]
+
+            red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+        if fd_var_wine_type.get() == 9:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            white = all_wines.loc[all_wines['type'] == 'white', :]
+
+            white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "White Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+    if fd_var_wine_char.get() == 4:
+        wine_char = "residual sugar"
+
+        if fd_var_wine_type.get() == 8:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            red = all_wines.loc[all_wines['type'] == 'red', :]
+
+            red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+        if fd_var_wine_type.get() == 9:
+            print(fd_var_wine_type)
+            print(fd_var_wine_char)
+
+            wine_char_value = int(freq_dist_value.get())
+            wine_char_2 = "quality"
+            all_wines = pd.read_csv('winequality-both.csv')
+
+            white = all_wines.loc[all_wines['type'] == 'white', :]
+
+            white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+            wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+            seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+            plt.title(
+                "White Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+            plt.ylabel('Number of wines')
+
+            plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            plt.show()
+
+
+
+
+
 
 
 
