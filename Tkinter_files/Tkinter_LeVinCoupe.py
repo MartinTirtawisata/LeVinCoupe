@@ -6,9 +6,9 @@ import pandas as pd
 import scipy.stats
 import seaborn
 import matplotlib.pyplot as plt
-
 from tkinter import *
 import tkinter as tk
+from tkinter import ttk
 import tkinter.messagebox as tm
 import sqlite3
 
@@ -32,25 +32,28 @@ def t_login():
 
     root_login = Tk()
     root_login.title("LeVinCoupe - Login")
-    root_login.geometry('400x100+300+400')
+    root_login.geometry('400x300+500+300')
 
-    label_email = Label(root_login, text="Email")
-    label_password = Label(root_login, text="Password")
-    button_sign_in = Button(root_login, text="Log in", command=t_check_login)
-    label_email.grid(row=0, column=0, sticky=E)
-    label_password.grid(row=1, column=0, sticky=E)
-    button_sign_in.grid(row=2, column=2, sticky=E)
+    label_title = ttk.Label(root_login, text="Welcome to LeVinCoupe")
+    label_title.grid(row=0, columnspan=3)
 
-    entry_email = Entry(root_login)
-    entry_password = Entry(root_login, show='*')
-    entry_email.grid(row=0, column=1)
-    entry_password.grid(row=1, column=1)
+    label_email = ttk.Label(root_login, text="Email")
+    label_password = ttk.Label(root_login, text="Password")
+    button_sign_in = ttk.Button(root_login, text="Log in", command=t_check_login)
+    label_email.grid(row=2, column=0, sticky=E)
+    label_password.grid(row=3, column=0, sticky=E)
+    button_sign_in.grid(row=4, column=2, sticky=E)
+
+    entry_email = ttk.Entry(root_login)
+    entry_password = ttk.Entry(root_login, show='*')
+    entry_email.grid(row=2, column=1)
+    entry_password.grid(row=3, column=1)
 
     var_check_login = IntVar()
     # this is a tkinter variable...??
-    check = Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var_check_login)  # Remove bracket for function argument
+    check = ttk.Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var_check_login)  # Remove bracket for function argument
     # command -- is one of the methods
-    check.grid(row=2, column=0, columnspan=2)
+    check.grid(row=4, column=0, columnspan=2)
     # column span to take two column
     root_login.mainloop()
 
@@ -86,16 +89,27 @@ def t_main_menu():
     root_menu = Tk()
     root_menu.title("LeVinCoupe Title")
 
+    top_Frame = Frame(root_menu)
+    top_Frame.pack(side=TOP)
+
+    back_button = ttk.Button(top_Frame, text="Back", command=t_login)
+    back_button.pack(side=LEFT)
+
     button_A = Button(root_menu, text="Register an Employee", command=t_menu_register)
-    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
-    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
-    button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
-    button_E = Button(root_menu, text="Quit", bg="red")
     button_A.pack()
+
+    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
     button_B.pack()
+
+    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
     button_C.pack()
+
+    button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
     button_D.pack()
+
+    button_E = Button(root_menu, text="Quit", fg="red")
     button_E.pack()
+
     root_menu.mainloop()
 
 #------------------------------------------------REGISTER---------------------------------------
