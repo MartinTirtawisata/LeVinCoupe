@@ -22,6 +22,27 @@ import sqlite3
 def start_program():
     t_login()
 
+def pressed_main_menu_r():
+    root_register.destroy()
+    return t_main_menu()
+
+def pressed_main_menu_a():
+    root_association.destroy()
+    return t_main_menu()
+
+def pressed_main_menu_fd():
+    root_freq_dist.destroy()
+    return t_main_menu()
+
+def quit_button_m():
+    root_menu.destroy()
+def quit_button_r():
+    root_register.destroy()
+def quit_button_a():
+    root_association.destroy()
+def quit_button_fd():
+    root_freq_dist.destroy()
+
 #---------------------LOGIN---------------------
 def t_login():
     global root_login
@@ -30,31 +51,37 @@ def t_login():
     global entry_password
     global var
 
+
     root_login = Tk()
     root_login.title("LeVinCoupe - Login")
-    root_login.geometry('400x300+500+300')
+    root_login.geometry('450x200+500+300')
 
-    label_title = ttk.Label(root_login, text="Welcome to LeVinCoupe")
-    label_title.grid(row=0, columnspan=3)
+    topFrame = Frame(root_login, bg="purple")
+    topFrame.pack(side=TOP,fill=X)
 
-    label_email = ttk.Label(root_login, text="Email")
-    label_password = ttk.Label(root_login, text="Password")
-    button_sign_in = ttk.Button(root_login, text="Log in", command=t_check_login)
-    label_email.grid(row=2, column=0, sticky=E)
-    label_password.grid(row=3, column=0, sticky=E)
-    button_sign_in.grid(row=4, column=2, sticky=E)
+    midFrame = Frame(root_login)
+    midFrame.pack(side=BOTTOM, fill=BOTH, expand=True)
 
-    entry_email = ttk.Entry(root_login)
-    entry_password = ttk.Entry(root_login, show='*')
-    entry_email.grid(row=2, column=1)
-    entry_password.grid(row=3, column=1)
+    label_title = ttk.Label(topFrame, text="Welcome to LeVinCoupe")
+    label_title.pack()
+
+    label_email = ttk.Label(midFrame, text="Email")
+    label_email.grid(row=0, column=2, sticky=E)
+    entry_email = ttk.Entry(midFrame)
+    entry_password = ttk.Entry(midFrame, show='*')
+
+    label_password = ttk.Label(midFrame, text="Password")
+    label_password.grid(row=1, column=2, sticky=E)
+    entry_email.grid(row=0, column=3, columnspan=2)
+    entry_password.grid(row=1, column=3, columnspan=2)
 
     var_check_login = IntVar()
-    # this is a tkinter variable...??
-    check = ttk.Checkbutton(root_login, text="Keep me signed in", command=t_checkState, variable=var_check_login)  # Remove bracket for function argument
-    # command -- is one of the methods
-    check.grid(row=4, column=0, columnspan=2)
-    # column span to take two column
+    check = ttk.Checkbutton(midFrame, text="Keep me signed in", command=t_checkState, variable=var_check_login)
+    check.grid(row=2, column=3, sticky=E)
+
+    button_sign_in = ttk.Button(midFrame, text="Log in", command=t_check_login)
+    button_sign_in.grid(row=2, column=4)
+
     root_login.mainloop()
 
 def t_check_login():
@@ -88,27 +115,29 @@ def t_main_menu():
     global root_menu
     root_menu = Tk()
     root_menu.title("LeVinCoupe Title")
+    root_menu.geometry('450x200+500+300')
 
-    top_Frame = Frame(root_menu)
-    top_Frame.pack(side=TOP)
+    top_Frame = Frame(root_menu, bg="yellow")
+    top_Frame.pack(side=TOP, fill=BOTH, expand=True)
+    bot_Frame = Frame(root_menu, bg="green")
+    bot_Frame.pack(side=BOTTOM, fill=X)
 
-    back_button = ttk.Button(top_Frame, text="Back", command=t_login)
+    button_A = Button(top_Frame, text="Register an Employee", command=t_menu_register)
+    button_A.pack(fill=X)
+
+    button_B = Button(top_Frame, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
+    button_B.pack(fill=X)
+
+    button_C = Button(top_Frame, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
+    button_C.pack(fill=X)
+
+    button_D = Button(top_Frame, text="Ask Additional Questions or Add Additional Features")
+    button_D.pack(fill=X)
+
+    back_button = ttk.Button(bot_Frame, text="Back", command=t_login)
     back_button.pack(side=LEFT)
-
-    button_A = Button(root_menu, text="Register an Employee", command=t_menu_register)
-    button_A.pack()
-
-    button_B = Button(root_menu, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
-    button_B.pack()
-
-    button_C = Button(root_menu, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
-    button_C.pack()
-
-    button_D = Button(root_menu, text="Ask Additional Questions or Add Additional Features")
-    button_D.pack()
-
-    button_E = Button(root_menu, text="Quit", fg="red")
-    button_E.pack()
+    quit_button = Button(bot_Frame, text="Quit", fg="red", command=quit_button_m)
+    quit_button.pack(side=RIGHT)
 
     root_menu.mainloop()
 
@@ -127,57 +156,70 @@ def t_register():
     global entry_zip_code
     global entry_email
     global entry_password
+    global root_register
     #Need Employee ID, First Name, Last Name,  Address, City, State, Zip Code, Email, Password
     root_register = Tk()
     root_register.title("LeVinCoupe Employee Register")
+    root_register.geometry('400x300+500+300')
 
-    label_emp_id = Label(root_register, text="Enter Employee ID")
+    top_Frame = Frame(root_register)
+    top_Frame.pack(side=TOP)
+    bot_Frame = Frame(root_register)
+    bot_Frame.pack(side=BOTTOM, fill=X)
+
+    label_emp_id = Label(top_Frame, text="Enter Employee ID")
     label_emp_id.grid(row=0, column=0)
-    entry_emp_id = Entry(root_register)
+    entry_emp_id = Entry(top_Frame)
     entry_emp_id.grid(row=0, column=1)
 
-    label_fname = Label(root_register, text="Enter First Name")
+    label_fname = Label(top_Frame, text="Enter First Name")
     label_fname.grid(row=1, column=0)
-    entry_fname = Entry(root_register)
+    entry_fname = Entry(top_Frame)
     entry_fname.grid(row=1, column=1)
 
-    label_lname = Label(root_register, text="Enter Last Name")
+    label_lname = Label(top_Frame, text="Enter Last Name")
     label_lname.grid(row=2, column=0)
-    entry_lname = Entry(root_register)
+    entry_lname = Entry(top_Frame)
     entry_lname.grid(row=2, column=1)
 
-    label_address = Label(root_register, text="Enter Address")
+    label_address = Label(top_Frame, text="Enter Address")
     label_address.grid(row=3, column=0)
-    entry_address = Entry(root_register)
+    entry_address = Entry(top_Frame)
     entry_address.grid(row=3, column=1)
 
-    label_city = Label(root_register, text="Enter City")
+    label_city = Label(top_Frame, text="Enter City")
     label_city.grid(row=4, column=0)
-    entry_city = Entry(root_register)
+    entry_city = Entry(top_Frame)
     entry_city.grid(row=4, column=1)
 
-    label_state = Label(root_register, text="Enter State")
+    label_state = Label(top_Frame, text="Enter State")
     label_state.grid(row=5, column=0)
-    entry_state = Entry(root_register)
+    entry_state = Entry(top_Frame)
     entry_state.grid(row=5, column=1)
 
-    label_zip_code = Label(root_register, text="Enter Zip Code")
+    label_zip_code = Label(top_Frame, text="Enter Zip Code")
     label_zip_code.grid(row=6, column=0)
-    entry_zip_code = Entry(root_register)
+    entry_zip_code = Entry(top_Frame)
     entry_zip_code.grid(row=6, column=1)
 
-    label_email = Label(root_register, text="Enter Email")
+    label_email = Label(top_Frame, text="Enter Email")
     label_email.grid(row=7, column=0)
-    entry_email = Entry(root_register)
+    entry_email = Entry(top_Frame)
     entry_email.grid(row=7, column=1)
 
-    label_password = Label(root_register, text="Enter Password")
+    label_password = Label(top_Frame, text="Enter Password")
     label_password.grid(row=8, column=0)
-    entry_password = Entry(root_register)
+    entry_password = Entry(top_Frame)
     entry_password.grid(row=8, column=1)
 
-    button_sign_up = Button(root_register, text="Sign Up", command=t_insert_registration)
+    button_sign_up = Button(top_Frame, text="Sign Up", command=t_insert_registration)
     button_sign_up.grid(columnspan=3)
+
+    back_button = Button(bot_Frame, text="Main Menu", command=pressed_main_menu_r)
+    back_button.pack(side=LEFT)
+    quit_button = Button(bot_Frame, text="Quit", fg='red', command=quit_button_r)
+    quit_button.pack(side=RIGHT)
+
     root_register.mainloop()
 
 def t_insert_registration():
@@ -216,31 +258,51 @@ def t_association():
 
     root_association = Tk()
     root_association.title("LeVinCoupe Association")
+    root_association.geometry('450x200+500+300')
+
+    top_Frame = Frame(root_association)
+    top_Frame.pack(side=TOP)
+    left_Frame = Frame(top_Frame, bg="green")
+    left_Frame.pack(side=LEFT, fill=BOTH, expand=True)
+    right_Frame = Frame(top_Frame, bg="blue")
+    right_Frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
+    middle_Frame = Frame(root_association, bg="purple")
+    middle_Frame.pack(side=TOP, fill=X)
+    bot_Frame = Frame(root_association)
+    bot_Frame.pack(side=BOTTOM, fill=X)
 
     var_wine_char = IntVar()
     var_wine_type = IntVar()
 
 
-    button_a = Radiobutton(root_association, text="Volatile Acidity and Wine Quality", variable=var_wine_char, value=1)
-    button_a.pack()
+    button_a = Radiobutton(left_Frame, text="Volatile Acidity and Wine Quality", variable=var_wine_char, value=1)
+    button_a.grid(row=0, column=1, sticky=W)
 
-    button_b = Radiobutton(root_association, text="Fixed Acidity and Wine Quality", variable=var_wine_char, value=2)
-    button_b.pack()
+    button_b = Radiobutton(left_Frame, text="Fixed Acidity and Wine Quality", variable=var_wine_char, value=2)
+    button_b.grid(row=1, column=1, sticky=W)
 
-    button_c = Radiobutton(root_association, text="Alcohol Percentage and Wine Quality", variable=var_wine_char, value=3)
-    button_c.pack()
+    button_c = Radiobutton(left_Frame, text="Alcohol Percentage and Wine Quality", variable=var_wine_char, value=3)
+    button_c.grid(row=2, column=1, sticky=W)
 
-    button_d = Radiobutton(root_association, text="Residual Sugar and Wine Quality", variable=var_wine_char, value=4)
-    button_d.pack()
+    button_d = Radiobutton(left_Frame, text="Residual Sugar and Wine Quality", variable=var_wine_char, value=4)
+    button_d.grid(row=3, column=1, sticky=W)
 
-    button_red = Radiobutton(root_association, text="Red", variable=var_wine_type, value=8)
-    button_red.pack()
+    button_red = Radiobutton(right_Frame, text="Red", variable=var_wine_type, value=8)
+    button_red.grid(row=0, column=0, sticky=W)
 
-    button_white = Radiobutton(root_association, text="White", variable=var_wine_type, value=9)
-    button_white.pack()
+    button_white = Radiobutton(right_Frame, text="White", variable=var_wine_type, value=9)
+    button_white.grid(row=1, column=0, sticky=W)
 
-    button_enter = Button(root_association, text="Submit", command=t_association_result)
-    button_enter.pack()
+    button_enter = Button(middle_Frame, text="Submit", command=t_association_result, fg="green")
+    button_enter.pack(fill=X)
+
+    back_button = ttk.Button(bot_Frame, text="Main Menu", command=pressed_main_menu_a)
+    back_button.pack(side=LEFT)
+    quit_button = Button(bot_Frame, text="Quit", fg="red", command=quit_button_a)
+    quit_button.pack(side=RIGHT)
+
+
 
     root_association.mainloop()
 
@@ -485,43 +547,64 @@ def t_freq_distribution():
     global freq_dist_value
     global fd_var_wine_char
     global fd_var_wine_type
+    global root_freq_dist
 
 
     root_freq_dist = Tk()
     root_freq_dist.title("LeVinCoupe Frequency Distribution")
+    root_freq_dist.geometry('450x200+500+300')
 
-    #users will choose wine characteristics
-    #users will choose wine type
-    #users will enter a value
+    top_Frame = Frame(root_freq_dist)
+    top_Frame.pack(side=TOP)
+    left_Frame = Frame(top_Frame)
+    left_Frame.pack(side=LEFT, fill=BOTH, expand=True)
+    right_Frame = Frame(top_Frame)
+    right_Frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
+    middle_Frame = Frame(root_freq_dist)
+    middle_Frame.pack(side=TOP, fill=X)
+
+    middle_bot_Frame = Frame(root_freq_dist)
+    middle_bot_Frame.pack(side=TOP, fill=X)
+
+    bot_Frame = Frame(root_freq_dist)
+    bot_Frame.pack(side=BOTTOM, fill=X)
+
 
     fd_var_wine_char = IntVar()
     fd_var_wine_type = IntVar()
 
-    button_a = Radiobutton(root_freq_dist, text="Volatile Acidity and Wine Quality", variable=fd_var_wine_char, value=1)
-    button_a.pack()
+    button_a = Radiobutton(left_Frame, text="Volatile Acidity and Wine Quality", variable=fd_var_wine_char, value=1)
+    button_a.grid(row=0, column=1, sticky=W)
 
-    button_b = Radiobutton(root_freq_dist, text="Fixed Acidity and Wine Quality", variable=fd_var_wine_char, value=2)
-    button_b.pack()
+    button_b = Radiobutton(left_Frame, text="Fixed Acidity and Wine Quality", variable=fd_var_wine_char, value=2)
+    button_b.grid(row=1, column=1, sticky=W)
 
-    button_c = Radiobutton(root_freq_dist, text="Alcohol Percentage and Wine Quality", variable=fd_var_wine_char,
+    button_c = Radiobutton(left_Frame, text="Alcohol Percentage and Wine Quality", variable=fd_var_wine_char,
                            value=3)
-    button_c.pack()
+    button_c.grid(row=2, column=1, sticky=W)
 
-    button_d = Radiobutton(root_freq_dist, text="Residual Sugar and Wine Quality", variable=fd_var_wine_char, value=4)
-    button_d.pack()
+    button_d = Radiobutton(left_Frame, text="Residual Sugar and Wine Quality", variable=fd_var_wine_char, value=4)
+    button_d.grid(row=3, column=1, sticky=W)
 
-    button_red = Radiobutton(root_freq_dist, text="Red", variable=fd_var_wine_type, value=8)
-    button_red.pack()
+    button_red = Radiobutton(right_Frame, text="Red", variable=fd_var_wine_type, value=8)
+    button_red.grid(row=0, column=0, sticky=W)
 
-    button_white = Radiobutton(root_freq_dist, text="White", variable=fd_var_wine_type, value=9)
-    button_white.pack()
+    button_white = Radiobutton(right_Frame, text="White", variable=fd_var_wine_type, value=9)
+    button_white.grid(row=1, column=0, sticky=W)
 
-    freq_dist_value = Entry(root_freq_dist)
-    freq_dist_value.pack()
+    freq_dist_value_lbl = Label(middle_Frame, text="Please Enter a Value")
+    freq_dist_value_lbl.pack(side=LEFT)
+    freq_dist_value = Entry(middle_Frame)
+    freq_dist_value.pack(side=LEFT)
 
-    button_enter = Button(root_freq_dist, text="Submit", command=t_freq_dist_result)
-    button_enter.pack()
+    button_enter = Button(middle_bot_Frame, text="Submit", command=t_freq_dist_result, fg="green")
+    button_enter.pack(side=BOTTOM, fill=X)
 
+    back_button = ttk.Button(bot_Frame, text="Main Menu", command=pressed_main_menu_fd)
+    back_button.pack(side=LEFT)
+    quit_button = Button(bot_Frame, text="Quit", fg="red", command=quit_button_fd)
+    quit_button.pack(side=RIGHT)
 
     root_freq_dist.mainloop()
 
