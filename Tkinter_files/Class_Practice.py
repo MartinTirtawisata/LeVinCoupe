@@ -1,8 +1,16 @@
 from tkinter import *
 import tkinter.messagebox as tm
+import sqlite3
+
 
 
 class LoginFrame(Frame):
+
+    with sqlite3.connect('LeVinEmployee.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Employee")
+        query_result = cursor.fetchall()
+
     def __init__(self, master):
         super().__init__(master)
 
@@ -26,24 +34,31 @@ class LoginFrame(Frame):
         self.pack()
 
     def check_login(self):
-        self.userEmail = self.str(entry_email.get())
-        self.userPassword = self.str(entry_password.get())
+        userEmail = self.entry_email.get()
+        userPassword = self.entry_password.get()
 
         try:
             with sqlite3.connect('LeVinEmployee.db') as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "SELECT * FROM Employee WHERE(Email = '" + self.userEmail + "') AND (Password = '" + self.userPassword + "')")
+                    "SELECT * FROM Employee WHERE(Email = '" + userEmail + "') AND (Password = '" + userPassword + "')")
                 query_result = cursor.fetchone()
                 print(query_result)
         except (KeyError) as e:
             print(e)
 
-        if self.userEmail == self.query_result[7] and self.userPassword == self.query_result[8]:
-            tm.showinfo("Login info", "Welcome John")
-
-class MenuFrame(Frame):
-    def __init__(self, master):
+        if userEmail == query_result[7] and userPassword == query_result[8]:
+            tm.showinfo("Login info", "Welcome " + query_result[1] + " " + query_result[2])
+        else:
+            if userEmail != query_result[7]:
+                tm.showerror("Login error", "Incorrect Email")
+            if userEmail != query_result[8]:
+                tm.showerror("Login error", "Incorrect Password")
+            if userEmail != query_result[7] and userPassword != query_result[8]:
+                tm.showerror("Login error", "Incorrect Email or Password")
+#
+# class MenuFrame(Frame):
+#     def __init__(self, master):
 
 
 
