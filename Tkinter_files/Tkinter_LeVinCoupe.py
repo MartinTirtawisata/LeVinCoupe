@@ -13,12 +13,11 @@ import tkinter.messagebox as tm
 import sqlite3
 
 
-
-
 #import matplotlib, Matplotlib(TkAgg),
 
 # (t) in front is to indicate that it is a tkinter function
 # (check) a function that validates
+
 def start_program():
     t_login()
 
@@ -114,7 +113,7 @@ def t_checkState():
 def t_main_menu():
     global root_menu
     root_menu = Tk()
-    root_menu.title("LeVinCoupe Title")
+    root_menu.title("LeVinCoupe - Menu")
     root_menu.geometry('450x200+500+300')
 
     top_Frame = Frame(root_menu, bg="yellow")
@@ -122,16 +121,16 @@ def t_main_menu():
     bot_Frame = Frame(root_menu, bg="green")
     bot_Frame.pack(side=BOTTOM, fill=X)
 
-    button_A = Button(top_Frame, text="Register an Employee", command=t_menu_register)
+    button_A = Button(top_Frame, text="Register other employees", command=t_menu_register)
     button_A.pack(fill=X)
 
-    button_B = Button(top_Frame, text="Associate Wine's Characteristic and Quality", command=t_menu_association)
+    button_B = Button(top_Frame, text="Test wine associations based on characteristic & quality", command=t_menu_association)
     button_B.pack(fill=X)
 
-    button_C = Button(top_Frame, text="Test Wine Characteristic Frequency Distribution based on Quality", command=t_menu_freq_distribution)
+    button_C = Button(top_Frame, text="Create wine frequency distribution based on value of wine characteristic & quality", command=t_menu_freq_distribution)
     button_C.pack(fill=X)
 
-    button_D = Button(top_Frame, text="Ask Additional Questions or Add Additional Features")
+    button_D = Button(top_Frame, text="Test wine associations based on user inputted characteristics")
     button_D.pack(fill=X)
 
     back_button = ttk.Button(bot_Frame, text="Back", command=t_login)
@@ -159,7 +158,7 @@ def t_register():
     global root_register
     #Need Employee ID, First Name, Last Name,  Address, City, State, Zip Code, Email, Password
     root_register = Tk()
-    root_register.title("LeVinCoupe Employee Register")
+    root_register.title("LeVinCoupe - Employee Registration")
     root_register.geometry('400x300+500+300')
 
     top_Frame = Frame(root_register)
@@ -257,7 +256,7 @@ def t_association():
     global var_wine_type
 
     root_association = Tk()
-    root_association.title("LeVinCoupe Association")
+    root_association.title("LeVinCoupe - Association")
     root_association.geometry('450x200+500+300')
 
     top_Frame = Frame(root_association)
@@ -551,7 +550,7 @@ def t_freq_distribution():
 
 
     root_freq_dist = Tk()
-    root_freq_dist.title("LeVinCoupe Frequency Distribution")
+    root_freq_dist.title("LeVinCoupe - Frequency Distribution")
     root_freq_dist.geometry('450x200+500+300')
 
     top_Frame = Frame(root_freq_dist)
@@ -796,15 +795,6 @@ def t_freq_dist_result():
 
             plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
             plt.show()
-
-
-
-
-
-
-
-
-
 
 
 
