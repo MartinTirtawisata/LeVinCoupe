@@ -535,7 +535,7 @@ class FreqDistFrame(tk.Frame):
                     tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for volatile acidity is 0.08 and the max value is 1.58. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 0.668938:
-                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines. Also, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
 
                     if wine_char_value > 0.14:
                         tm.showinfo("ALERT", "The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
@@ -566,7 +566,7 @@ class FreqDistFrame(tk.Frame):
                     tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for volatile acidity is 0.08 and the max value is 1.58. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 0.668938:
-                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines. Also, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines.")
 
                     if wine_char_value > 0.12:
                         tm.showinfo("ALERT", "The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
@@ -661,7 +661,7 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 14.9 or wine_char_value < 8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits).")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 12.877224:
                         tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean alcohol percentage for all wines.")
@@ -688,7 +688,7 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 14.9 or wine_char_value < 8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits).")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 12.877224:
                         tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean alcohol percentage for all wines.")
