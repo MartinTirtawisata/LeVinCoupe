@@ -210,7 +210,7 @@ class RegisterFrame(tk.Frame):
                 tm.showinfo("Registration Info", + userF_name + " " + userL_name + "has been successfully registered")
                 controller.show_frame("MenuFrame")
         except:
-            tm.showerror("Registration error", "Employee was unable to be registered. Information Error")
+            tm.showerror("Registration error", "Employee was unable to be registered. Please check the information you entered.")
 
 class AssociationFrame(tk.Frame):
 
@@ -273,8 +273,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
@@ -284,8 +283,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
             if self.var_wine_type.get() == 9:
                 print(self.var_wine_char)
                 print(self.var_wine_type)
@@ -299,8 +297,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
@@ -310,8 +307,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
                     # ---------------------------------------FIXED ACIDITY--------------------------------------
         if self.var_wine_char.get() == 2:
             if self.var_wine_type.get() == 8:
@@ -327,8 +323,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
@@ -338,8 +333,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
             if self.var_wine_type.get() == 9:
                 print(self.var_wine_char)
@@ -354,8 +348,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
@@ -365,8 +358,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
                     # -----------------------------------------------ALCOHOL-------------------------------------------------------------
         if self.var_wine_char.get() == 3:
             if self.var_wine_type.get() == 8:
@@ -382,8 +374,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
@@ -393,8 +384,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
             if self.var_wine_type.get() == 9:
                 print(self.var_wine_char)
@@ -409,8 +399,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
@@ -420,8 +409,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
                     # ---------------------------------------------------RESIDUAL SUGAR -----------------------------------------------
         if self.var_wine_char.get() == 4:
             if self.var_wine_type.get() == 8:
@@ -437,8 +425,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
@@ -448,8 +435,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
             if self.var_wine_type.get() == 9:
                 print(self.var_wine_char)
@@ -464,8 +450,7 @@ class AssociationFrame(tk.Frame):
                     getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
                     correlation = str(getCorr[0])
                     pValue = str(getCorr[1])
-                    print(
-                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
                     print("With p-value of: " + pValue)
 
                     seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
@@ -475,8 +460,7 @@ class AssociationFrame(tk.Frame):
                     plt.show()
 
                 except (KeyError) as e:
-                    print(
-                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    print("\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
 
 class FreqDistFrame(tk.Frame):
 
@@ -545,14 +529,13 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 1.58 or wine_char_value < 0.08 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 0.08 and 1.58")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for volatile acidity is 0.08 and the max value is 1.58. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
-                    if wine_char_value > 0.6:
-                        tm.showinfo("ALERT", "You have entered more than 2 Standard Deviation from the mean volatile acidity.")
+                    if wine_char_value > 0.668938:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines. Also, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
 
                     if wine_char_value > 0.14:
-                        tm.showinfo("ALERT", "The value entered is also greater than the regulated amount set by the Federal Tax & Trade Bureau. The max allowed is 0.14\
-                                     It is recommended that you do not go over the max")
+                        tm.showinfo("ALERT", "The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -564,8 +547,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                    plt.title("Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
                     plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -578,15 +560,14 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 1.58 or wine_char_value < 0.08 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 0.08 and 1.58")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for volatile acidity is 0.08 and the max value is 1.58. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
-                    if wine_char_value > 0.6:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean volatile acidity.")
+                    if wine_char_value > 0.668938:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean volatile acidity for all wines. Also, The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
 
                     if wine_char_value > 0.12:
-                        tm.showinfo("ALERT", "The value entered is also greater than the regulated amount set by the Federal Tax & Trade Bureau. The max allowed is 0.14\
-                                                     It is recommended that you do not go over the max")
+                        tm.showinfo("ALERT", "The value you have entered for volatile acidity is greater than the regulated amount set by the federal Tax & Trade Bureau. For red wines, the max volatile acidity allowed is 0.14. For white wines, the max volatile acidity allowed is 0.12. It is recommended that you blend an amount of volatile acidity in the wine that is no greater than the federally regulated limit.")
+
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
 
@@ -597,8 +578,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "White Wine: " + self.wine_char + " value of " + str(
+                    plt.title("White Wine: " + self.wine_char + " value of " + str(
                             wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
@@ -614,12 +594,13 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 15.9 or wine_char_value < 3.8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 15.9 and 3.8")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for fixed acidity is 3.8 and the max value is 15.9. Please enter a value within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 12:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean fixed acidity.\
-                                    This high amount of fixed acidity can cause a wine to taste too sour")
+                        tm.showinfo("ALERT", "This high of an amount of fixed acidity can cause a wine to taste too sour. It is recommended that you blend a lower amount of fixed acidity into the wine.")
+
+                    if wine_char_value > 9.808175:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean fixed acidity for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -631,8 +612,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                    plt.title("Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
                     plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -644,12 +624,13 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 15.9 or wine_char_value < 3.8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 15.9 and 3.8")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for fixed acidity is 3.8 and the max value is 15.9. Please enter a value within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value > 12:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean volatile acidity.\
-                                    This high amount of fixed acidity can cause a wine to taste too sour")
+                        tm.showinfo("ALERT", "This high of an amount of fixed acidity can cause a wine to taste too sour. It is recommended that you blend a lower amount of fixed acidity into the wine.")
+
+                    if wine_char_value > 9.808175:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean fixed acidity for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -661,8 +642,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "White Wine: " + self.wine_char + " value of " + str(
+                    plt.title("White Wine: " + self.wine_char + " value of " + str(
                             wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
@@ -678,11 +658,10 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 14.9 or wine_char_value < 8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 14.9 and 8")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits).")
                 else:
-                    if wine_char_value > 12.8:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean alcohol percentage")
+                    if wine_char_value > 12.877224:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean alcohol percentage for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -694,8 +673,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                    plt.title("Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
                     plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -707,11 +685,10 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 14.9 or wine_char_value < 8 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 14.9 and 8")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for alcohol percentage is 8 and the max value is 14.9. Enter a numerical value for this characteristic within the given range (including lower and upper limits).")
                 else:
-                    if wine_char_value > 12.8:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean alcohol percentage")
+                    if wine_char_value > 12.877224:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean alcohol percentage for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -723,8 +700,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "White Wine: " + self.wine_char + " value of " + str(
+                    plt.title("White Wine: " + self.wine_char + " value of " + str(
                             wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
@@ -740,19 +716,14 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 65.8 or wine_char_value < 0.6 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 65.8 and 0.6")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for residual sugar is 0.6 and the max value is 65.8. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value < 4:
-                        tm.showinfo("ALERT",
-                                    "NOTE: It is recommended you enter a value of 4 or greater for residual sugar so that your wine has some sweetness.\
-                        If a wine has a low value for residual sugar, it is recommended that you DO NOT blend it with a dry wine.")
+                        tm.showinfo("ALERT", "It is recommended you enter a value of 4 or greater for residual sugar so that your wine has some sweetness. If a wine has a low value for residual sugar, it is recommended that you DO NOT blend it with a dry wine.")
                     if wine_char_value >= 20:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean residual sugar\
-                        Since this is a high value for residual sugar, it is recommended that you blend this wine with a dryer wine to balance out the overall taste.")
-                    if wine_char_value > 14.9:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean residual sugar")
+                        tm.showinfo("ALERT", "Since this is a high value for residual sugar, it is recommended that you blend this wine with a dryer wine to balance out the overall taste.")
+                    if wine_char_value > 14.958843:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean residual sugar for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -764,8 +735,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                    plt.title("Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
                     plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -777,19 +747,14 @@ class FreqDistFrame(tk.Frame):
 
                 wine_char_value = float(self.freq_dist_value.get())
                 if wine_char_value > 65.8 or wine_char_value < 0.6 or wine_char_value == "":
-                    tm.showerror("Error", "Incorrect Input. Please enter a value between 65.8 and 0.6")
+                    tm.showerror("Error", "Incorrect Input. For all wines, the minimum value for residual sugar is 0.6 and the max value is 65.8. Enter a numerical value for this characteristic within the given range (including lower and upper limits.)")
                 else:
                     if wine_char_value < 4:
-                        tm.showinfo("ALERT",
-                                    "NOTE: It is recommended you enter a value of 4 or greater for residual sugar so that your wine has some sweetness.\
-                        If a wine has a low value for residual sugar, it is recommended that you DO NOT blend it with a dry wine.")
+                        tm.showinfo("ALERT", "It is recommended you enter a value of 4 or greater for residual sugar so that your wine has some sweetness. If a wine has a low value for residual sugar, it is recommended that you DO NOT blend it with a dry wine.")
                     if wine_char_value >= 20:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean residual sugar\
-                        Since this is a high value for residual sugar, it is recommended that you blend this wine with a dryer wine to balance out the overall taste.")
-                    if wine_char_value > 14.9:
-                        tm.showinfo("ALERT",
-                                    "You have entered more than 2 Standard Deviation from the mean residual sugar")
+                        tm.showinfo("ALERT", "Since this is a high value for residual sugar, it is recommended that you blend this wine with a dryer wine to balance out the overall taste.")
+                    if wine_char_value > 14.958843:
+                        tm.showinfo("ALERT", "The value you have entered is more than two standard deviations away from the mean residual sugar for all wines.")
 
                     wine_char_2 = "quality"
                     all_wines = pd.read_csv('winequality-both.csv')
@@ -801,8 +766,7 @@ class FreqDistFrame(tk.Frame):
                     wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
                     seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                    plt.title(
-                        "White Wine: " + self.wine_char + " value of " + str(
+                    plt.title("White Wine: " + self.wine_char + " value of " + str(
                             wine_char_value) + ", frequencies by " + wine_char_2)
                     plt.ylabel('Number of wines')
 
