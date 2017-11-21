@@ -129,8 +129,8 @@ class RegisterFrame(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
         self.controller = controller
+
         self.top_Frame = tk.Frame(self)
         self.top_Frame.pack(side=TOP)
         self.bot_Frame = tk.Frame(self)
@@ -192,8 +192,8 @@ class RegisterFrame(tk.Frame):
     def insert_registration(self, controller):
         self.controller = controller
         userEmp_id = self.entry_emp_id.get()
-        userF_name = self.entry_fname.get()
-        userL_name = self.entry_lname.get()
+        userF_name = str(self.entry_fname.get())
+        userL_name = str(self.entry_lname.get())
         userAddress = self.entry_address.get()
         userCity = self.entry_city.get()
         userState = self.entry_state.get()
@@ -207,9 +207,10 @@ class RegisterFrame(tk.Frame):
                 cursor.execute("INSERT INTO Employee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                (userEmp_id, userF_name, userL_name, userAddress, userCity, userState, userZip_code,
                                 userEmail, userPassword))
-                tm.showinfo("Registration Info", + userF_name + " " + userL_name + "has been successfully registered")
+                tm.showinfo("Registration Info", "" + userF_name + " " + userL_name + "has been successfully registered")
                 controller.show_frame("MenuFrame")
-        except:
+        except sqlite3.Error as e:
+            print(e)
             tm.showerror("Registration error", "Employee was unable to be registered. Information Error")
 
 class AssociationFrame(tk.Frame):
