@@ -587,7 +587,7 @@ class FreqDistFrame(tk.Frame):
                     plt.show()
 
         if self.fd_var_wine_char.get() == 2:
-            wine_char = "fixed acidity"
+            self.wine_char = "fixed acidity"
 
             if self.fd_var_wine_type.get() == 8:
                 print(self.fd_var_wine_type)
@@ -651,7 +651,7 @@ class FreqDistFrame(tk.Frame):
                     plt.show()
 
         if self.fd_var_wine_char.get() == 3:
-            wine_char = "alcohol"
+            self.wine_char = "alcohol"
 
             if self.fd_var_wine_type.get() == 8:
                 print(self.fd_var_wine_type)
@@ -709,7 +709,7 @@ class FreqDistFrame(tk.Frame):
                     plt.show()
 
         if self.fd_var_wine_char.get() == 4:
-            wine_char = "residual sugar"
+            self.wine_char = "residual sugar"
 
             if self.fd_var_wine_type.get() == 8:
                 print(self.fd_var_wine_type)
