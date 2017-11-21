@@ -113,17 +113,13 @@ class MenuFrame(tk.Frame):
         self.button_B.pack(fill=X)
 
         self.button_C = tk.Button(self.top_Frame,
-                          text="Create wine frequency distribution based on value of wine characteristic & quality",
+                                  text="Create wine frequency distribution based on value of wine characteristic & quality",
                                   command=lambda: controller.show_frame("FreqDistFrame"))
         self.button_C.pack(fill=X)
 
-        self.button_D = tk.Button(self.top_Frame, text="Test wine associations based on user inputted characteristics")
-        self.button_D.pack(fill=X)
-
         self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("LoginFrame"))
         self.back_button.pack(side=LEFT)
-        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
-        self.quit_button.pack(side=RIGHT)
+
 
 class RegisterFrame(tk.Frame):
 
@@ -186,8 +182,8 @@ class RegisterFrame(tk.Frame):
 
         self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
         self.back_button.pack(side=LEFT)
-        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg='red')
-        self.quit_button.pack(side=RIGHT)
+
+
 
     def insert_registration(self, controller):
         self.controller = controller
@@ -257,8 +253,8 @@ class AssociationFrame(tk.Frame):
 
         self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
         self.back_button.pack(side=LEFT)
-        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
-        self.quit_button.pack(side=RIGHT)
+
+
 
     def association_result(self):
         if self.var_wine_char.get() == 1:
@@ -517,8 +513,8 @@ class FreqDistFrame(tk.Frame):
 
         self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
         self.back_button.pack(side=LEFT)
-        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
-        self.quit_button.pack(side=RIGHT)
+
+
 
     def freq_dist_result(self):
         if self.fd_var_wine_char.get() == 1:
@@ -773,6 +769,7 @@ class FreqDistFrame(tk.Frame):
 
                     plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
                     plt.show()
+
 
 if __name__ == "__main__":
     app = SampleApp()
