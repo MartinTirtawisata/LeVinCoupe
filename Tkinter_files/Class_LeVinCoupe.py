@@ -209,14 +209,10 @@ class RegisterFrame(tk.Frame):
                                 userEmail, userPassword))
                 tm.showinfo("Registration Info", "" + userF_name + " " + userL_name + "has been successfully registered")
                 controller.show_frame("MenuFrame")
-<<<<<<< HEAD
         except sqlite3.Error as e:
             print(e)
             tm.showerror("Registration error", "Employee was unable to be registered. Information Error")
-=======
-        except:
-            tm.showerror("Registration error", "Employee was unable to be registered. Please check the information you entered.")
->>>>>>> 161dcc20c326ae13049c745975de56477a0e7b6e
+
 
 class AssociationFrame(tk.Frame):
 
