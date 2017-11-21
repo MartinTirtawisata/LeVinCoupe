@@ -119,7 +119,7 @@ def registration():
     print("\nEmployee successfully registered!")
 
     while True:
-        after = input("\nWould you like to return to the main menu or register more employees? (enter 'main' or 'register': ").lower().strip()
+        after = input("\nWould you like to return to the main menu or register more employees? (enter 'main' or 'register'): ").lower().strip()
         if after == "main":
             break
         if after == "register":
