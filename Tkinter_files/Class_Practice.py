@@ -1,39 +1,76 @@
+import matplotlib
+matplotlib.use("TkAgg")
+import pandas as pd
+import scipy.stats
+import seaborn
+import matplotlib.pyplot as plt
+import tkinter as tk
 from tkinter import *
+from tkinter import font as tkfont
 import tkinter.messagebox as tm
 import sqlite3
 
 
+class SampleApp(tk.Tk):
 
-class LoginFrame(Frame):
+    def __init__(self, *args, **kwargs):
+        tk.Tk.__init__(self, *args, **kwargs)
 
-    with sqlite3.connect('LeVinEmployee.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Employee")
-        query_result = cursor.fetchall()
+        self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
 
-    def __init__(self, master):
-        super().__init__(master)
+        # the container is where we'll stack a bunch of frames
+        # on top of each other, then the one we want visible
+        # will be raised above the others
+        container = tk.Frame(self)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
-        self.label_email = Label(self, text="Email")
-        self.label_password = Label(self, text="Password")
+        self.frames = {}
+        for F in (LoginFrame, MenuFrame, RegisterFrame, AssociationFrame, FreqDistFrame):
+            page_name = F.__name__
+            frame = F(parent=container, controller=self)
+            self.frames[page_name] = frame
 
-        self.entry_email = Entry(self)
-        self.entry_password = Entry(self, show="*")
+            # put all of the pages in the same location;
+            # the one on the top of the stacking order
+            # will be the one that is visible.
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame("LoginFrame")
+
+    def show_frame(self, page_name):
+        '''Show a frame for the given page name'''
+        frame = self.frames[page_name]
+        frame.tkraise()
+
+class LoginFrame(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        self.label_email = tk.Label(self, text="Email")
+        self.label_password = tk.Label(self, text="Password")
+
+        self.entry_email = tk.Entry(self)
+        self.entry_password = tk.Entry(self, show="*")
 
         self.label_email.grid(row=0, sticky=E)
         self.label_password.grid(row=1, sticky=E)
         self.entry_email.grid(row=0, column=1)
         self.entry_password.grid(row=1, column=1)
 
-        self.checkbox = Checkbutton(self, text="Keep me logged in")
+        self.checkbox = tk.Checkbutton(self, text="Keep me logged in")
         self.checkbox.grid(columnspan=2)
 
-        self.logbtn = Button(self, text="Login", command = self.check_login)
+        self.logbtn = tk.Button(self, text="Login", command=lambda: self.check_login(controller))
         self.logbtn.grid(columnspan=2)
 
         self.pack()
 
-    def check_login(self):
+    def check_login(self, controller):
+        self.controller = controller
         userEmail = self.entry_email.get()
         userPassword = self.entry_password.get()
 
@@ -46,25 +83,651 @@ class LoginFrame(Frame):
                 print(query_result)
         except (KeyError) as e:
             print(e)
-
-        if userEmail == query_result[7] and userPassword == query_result[8]:
-            tm.showinfo("Login info", "Welcome " + query_result[1] + " " + query_result[2])
-        else:
-            if userEmail != query_result[7]:
-                tm.showerror("Login error", "Incorrect Email")
-            if userEmail != query_result[8]:
-                tm.showerror("Login error", "Incorrect Password")
-            if userEmail != query_result[7] and userPassword != query_result[8]:
-                tm.showerror("Login error", "Incorrect Email or Password")
-#
-# class MenuFrame(Frame):
-#     def __init__(self, master):
+        try:
+            if userEmail == query_result[7] and userPassword == query_result[8]:
+                tm.showinfo("Login info", "Welcome " + query_result[1] + " " + query_result[2])
+                controller.show_frame("MenuFrame")
+        except:
+            tm.showerror("Login error", "Incorrect Email or Password")
 
 
 
+class MenuFrame(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        self.top_Frame = tk.Frame(self, bg="yellow")
+        self.top_Frame.pack(side=TOP, fill=BOTH, expand=True)
+        self.bot_Frame = tk.Frame(self, bg="green")
+        self.bot_Frame.pack(side=BOTTOM, fill=X)
+
+        self.button_A = tk.Button(self.top_Frame, text="Register other employees",
+                                  command=lambda: controller.show_frame("RegisterFrame"))
+        self.button_A.pack(fill=X)
+
+        self.button_B = tk.Button(self.top_Frame, text="Test wine associations based on characteristic & quality",
+                                  command=lambda: controller.show_frame("AssociationFrame"))
+        self.button_B.pack(fill=X)
+
+        self.button_C = tk.Button(self.top_Frame,
+                          text="Create wine frequency distribution based on value of wine characteristic & quality",
+                                  command=lambda: controller.show_frame("FreqDistFrame"))
+        self.button_C.pack(fill=X)
+
+        self.button_D = tk.Button(self.top_Frame, text="Test wine associations based on user inputted characteristics")
+        self.button_D.pack(fill=X)
+
+        self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("LoginFrame"))
+        self.back_button.pack(side=LEFT)
+        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
+        self.quit_button.pack(side=RIGHT)
+
+class RegisterFrame(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        self.controller = controller
+        self.top_Frame = tk.Frame(self)
+        self.top_Frame.pack(side=TOP)
+        self.bot_Frame = tk.Frame(self)
+        self.bot_Frame.pack(side=BOTTOM, fill=X)
+
+        self.label_emp_id = tk.Label(self.top_Frame, text="Enter Employee ID")
+        self.label_emp_id.grid(row=0, column=0)
+        self.entry_emp_id = tk.Entry(self.top_Frame)
+        self.entry_emp_id.grid(row=0, column=1)
+
+        self.label_fname = tk.Label(self.top_Frame, text="Enter First Name")
+        self.label_fname.grid(row=1, column=0)
+        self.entry_fname = tk.Entry(self.top_Frame)
+        self.entry_fname.grid(row=1, column=1)
+
+        self.label_lname = tk.Label(self.top_Frame, text="Enter Last Name")
+        self.label_lname.grid(row=2, column=0)
+        self.entry_lname = tk.Entry(self.top_Frame)
+        self.entry_lname.grid(row=2, column=1)
+
+        self.label_address = tk.Label(self.top_Frame, text="Enter Address")
+        self.label_address.grid(row=3, column=0)
+        self.entry_address = tk.Entry(self.top_Frame)
+        self.entry_address.grid(row=3, column=1)
+
+        self.label_city = tk.Label(self.top_Frame, text="Enter City")
+        self.label_city.grid(row=4, column=0)
+        self.entry_city = tk.Entry(self.top_Frame)
+        self.entry_city.grid(row=4, column=1)
+
+        self.label_state = tk.Label(self.top_Frame, text="Enter State")
+        self.label_state.grid(row=5, column=0)
+        self.entry_state = tk.Entry(self.top_Frame)
+        self.entry_state.grid(row=5, column=1)
+
+        self.label_zip_code = tk.Label(self.top_Frame, text="Enter Zip Code")
+        self.label_zip_code.grid(row=6, column=0)
+        self.entry_zip_code = tk.Entry(self.top_Frame)
+        self.entry_zip_code.grid(row=6, column=1)
+
+        self.label_email = tk.Label(self.top_Frame, text="Enter Email")
+        self.label_email.grid(row=7, column=0)
+        self.entry_email = tk.Entry(self.top_Frame)
+        self.entry_email.grid(row=7, column=1)
+
+        self.label_password = tk.Label(self.top_Frame, text="Enter Password")
+        self.label_password.grid(row=8, column=0)
+        self.entry_password = tk.Entry(self.top_Frame)
+        self.entry_password.grid(row=8, column=1)
+
+        self.button_sign_up = tk.Button(self.top_Frame, text="Sign Up", command=lambda: self.insert_registration(controller))
+        self.button_sign_up.grid(columnspan=3)
+
+        self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
+        self.back_button.pack(side=LEFT)
+        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg='red')
+        self.quit_button.pack(side=RIGHT)
+
+    def insert_registration(self, controller):
+        self.controller = controller
+        userEmp_id = self.entry_emp_id.get()
+        userF_name = self.entry_fname.get()
+        userL_name = self.entry_lname.get()
+        userAddress = self.entry_address.get()
+        userCity = self.entry_city.get()
+        userState = self.entry_state.get()
+        userZip_code = self.entry_zip_code.get()
+        userEmail = self.entry_email.get()
+        userPassword = self.entry_password.get()
+
+        try:
+            with sqlite3.connect('LeVinEmployee.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO Employee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                               (userEmp_id, userF_name, userL_name, userAddress, userCity, userState, userZip_code,
+                                userEmail, userPassword))
+                tm.showinfo("Registration Info", + userF_name + " " + userL_name + "has been successfully registered")
+                controller.show_frame("MenuFrame")
+        except:
+            tm.showerror("Registration error", "Employee was unable to be registered. Information Error")
+
+class AssociationFrame(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        self.top_Frame = tk.Frame(self)
+        self.top_Frame.pack(side=TOP)
+        self.left_Frame = tk.Frame(self.top_Frame, bg="green")
+        self.left_Frame.pack(side=LEFT, fill=BOTH, expand=True)
+        self.right_Frame = tk.Frame(self.top_Frame, bg="blue")
+        self.right_Frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
+        self.middle_Frame = tk.Frame(self, bg="purple")
+        self.middle_Frame.pack(side=TOP, fill=X)
+        self.bot_Frame = tk.Frame(self)
+        self.bot_Frame.pack(side=BOTTOM, fill=X)
+
+        self.var_wine_char = tk.IntVar()
+        self.var_wine_type = tk.IntVar()
+
+        self.button_a = tk.Radiobutton(self.left_Frame, text="Volatile Acidity and Wine Quality", variable=self.var_wine_char, value=1)
+        self.button_a.grid(row=0, column=1, sticky=W)
+
+        self.button_b = tk.Radiobutton(self.left_Frame, text="Fixed Acidity and Wine Quality", variable=self.var_wine_char, value=2)
+        self.button_b.grid(row=1, column=1, sticky=W)
+
+        self.button_c = tk.Radiobutton(self.left_Frame, text="Alcohol Percentage and Wine Quality", variable=self.var_wine_char, value=3)
+        self.button_c.grid(row=2, column=1, sticky=W)
+
+        self.button_d = tk.Radiobutton(self.left_Frame, text="Residual Sugar and Wine Quality", variable=self.var_wine_char, value=4)
+        self.button_d.grid(row=3, column=1, sticky=W)
+
+        self.button_red = tk.Radiobutton(self.right_Frame, text="Red", variable=self.var_wine_type, value=8)
+        self.button_red.grid(row=0, column=0, sticky=W)
+
+        self.button_white = tk.Radiobutton(self.right_Frame, text="White", variable=self.var_wine_type, value=9)
+        self.button_white.grid(row=1, column=0, sticky=W)
+
+        self.button_enter = tk.Button(self.middle_Frame, text="Submit", command=self.association_result, fg="green")
+        self.button_enter.pack(fill=X)
+
+        self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
+        self.back_button.pack(side=LEFT)
+        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
+        self.quit_button.pack(side=RIGHT)
+
+    def association_result(self):
+        if self.var_wine_char.get() == 1:
+            if self.var_wine_type.get() == 8:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "volatile acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    red = allWines.loc[allWines['type'] == 'red', :]
+
+                    getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+            if self.var_wine_type.get() == 9:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "volatile acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    white = allWines.loc[allWines['type'] == 'white', :]
+
+                    getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    # ---------------------------------------FIXED ACIDITY--------------------------------------
+        if self.var_wine_char.get() == 2:
+            if self.var_wine_type.get() == 8:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "fixed acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    red = allWines.loc[allWines['type'] == 'red', :]
+
+                    getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+            if self.var_wine_type.get() == 9:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "fixed acidity"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    white = allWines.loc[allWines['type'] == 'white', :]
+
+                    getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    # -----------------------------------------------ALCOHOL-------------------------------------------------------------
+        if self.var_wine_char.get() == 3:
+            if self.var_wine_type.get() == 8:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "alcohol"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    red = allWines.loc[allWines['type'] == 'red', :]
+
+                    getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+            if self.var_wine_type.get() == 9:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "alcohol"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    white = allWines.loc[allWines['type'] == 'white', :]
+
+                    getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+                    # ---------------------------------------------------RESIDUAL SUGAR -----------------------------------------------
+        if self.var_wine_char.get() == 4:
+            if self.var_wine_type.get() == 8:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "residual sugar"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    red = allWines.loc[allWines['type'] == 'red', :]
+
+                    getCorr = scipy.stats.pearsonr(red[WineCharX], red[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor red wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=red)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("Red Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+            if self.var_wine_type.get() == 9:
+                print(self.var_wine_char)
+                print(self.var_wine_type)
+
+                try:
+                    WineCharX = "quality"
+                    WineCharY = "residual sugar"
+                    allWines = pd.read_csv('winequality-both.csv', sep=',', header=0)
+                    white = allWines.loc[allWines['type'] == 'white', :]
+
+                    getCorr = scipy.stats.pearsonr(white[WineCharX], white[WineCharY])
+                    correlation = str(getCorr[0])
+                    pValue = str(getCorr[1])
+                    print(
+                        "\nFor white wine, the correlation between " + WineCharX + " and " + WineCharY + " is: " + correlation)
+                    print("With p-value of: " + pValue)
+
+                    seaborn.lmplot(x=WineCharX, y=WineCharY, data=white)
+                    plt.xlabel(WineCharX)
+                    plt.ylabel(WineCharY)
+                    plt.title("White Wine: " + WineCharX + " X " + WineCharY)
+                    plt.show()
+
+                except (KeyError) as e:
+                    print(
+                        "\nError. Please check that your spelling is correct of the wine characteristic you wish to test.")
+
+class FreqDistFrame(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        self.top_Frame = tk.Frame(self)
+        self.top_Frame.pack(side=TOP)
+        self.left_Frame = tk.Frame(self.top_Frame)
+        self.left_Frame.pack(side=LEFT, fill=BOTH, expand=True)
+        self.right_Frame = tk.Frame(self.top_Frame)
+        self.right_Frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
+        self.middle_Frame = tk.Frame(self)
+        self.middle_Frame.pack(side=TOP, fill=X)
+
+        self.middle_bot_Frame = tk.Frame(self)
+        self.middle_bot_Frame.pack(side=TOP, fill=X)
+
+        self.bot_Frame = tk.Frame(self)
+        self.bot_Frame.pack(side=BOTTOM, fill=X)
+
+        self.fd_var_wine_char = IntVar()
+        self.fd_var_wine_type = IntVar()
+
+        self.button_a = tk.Radiobutton(self.left_Frame, text="Volatile Acidity and Wine Quality", variable=self.fd_var_wine_char, value=1)
+        self.button_a.grid(row=0, column=1, sticky=W)
+
+        self.button_b = tk.Radiobutton(self.left_Frame, text="Fixed Acidity and Wine Quality", variable=self.fd_var_wine_char, value=2)
+        self.button_b.grid(row=1, column=1, sticky=W)
+
+        self.button_c = tk.Radiobutton(self.left_Frame, text="Alcohol Percentage and Wine Quality", variable=self.fd_var_wine_char,
+                               value=3)
+        self.button_c.grid(row=2, column=1, sticky=W)
+
+        self.button_d = tk.Radiobutton(self.left_Frame, text="Residual Sugar and Wine Quality", variable=self.fd_var_wine_char, value=4)
+        self.button_d.grid(row=3, column=1, sticky=W)
+
+        self.button_red = tk.Radiobutton(self.right_Frame, text="Red", variable=self.fd_var_wine_type, value=8)
+        self.button_red.grid(row=0, column=0, sticky=W)
+
+        self.button_white = tk.Radiobutton(self.right_Frame, text="White", variable=self.fd_var_wine_type, value=9)
+        self.button_white.grid(row=1, column=0, sticky=W)
+
+        self.freq_dist_value_lbl = tk.Label(self.middle_Frame, text="Please Enter a Value")
+        self.freq_dist_value_lbl.pack(side=LEFT)
+        self.freq_dist_value = tk.Entry(self.middle_Frame)
+        self.freq_dist_value.pack(side=LEFT)
+
+        self.button_enter = tk.Button(self.middle_bot_Frame, text="Submit", command=self.freq_dist_result,fg="green")
+        self.button_enter.pack(side=BOTTOM, fill=X)
+
+        self.back_button = tk.Button(self.bot_Frame, text="Main Menu", command=lambda: controller.show_frame("MenuFrame"))
+        self.back_button.pack(side=LEFT)
+        self.quit_button = tk.Button(self.bot_Frame, text="Quit", fg="red")
+        self.quit_button.pack(side=RIGHT)
+
+    def freq_dist_result(self):
+        if self.fd_var_wine_char.get() == 1:
+            self.wine_char = "volatile acidity"
+
+            if self.fd_var_wine_type.get() == 8:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                red = all_wines.loc[all_wines['type'] == 'red', :]
+
+                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+            if self.fd_var_wine_type.get() == 9:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                white = all_wines.loc[all_wines['type'] == 'white', :]
+
+                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "White Wine: " + wine_char + " value of " + str(
+                        wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+        if self.fd_var_wine_char.get() == 2:
+            wine_char = "fixed acidity"
+
+            if self.fd_var_wine_type.get() == 8:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                red = all_wines.loc[all_wines['type'] == 'red', :]
+
+                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+            if self.fd_var_wine_type.get() == 9:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                white = all_wines.loc[all_wines['type'] == 'white', :]
+
+                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "White Wine: " + wine_char + " value of " + str(
+                        wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+        if self.fd_var_wine_char.get() == 3:
+            wine_char = "alcohol"
+
+            if self.fd_var_wine_type.get() == 8:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                red = all_wines.loc[all_wines['type'] == 'red', :]
+
+                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+            if self.fd_var_wine_type.get() == 9:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                white = all_wines.loc[all_wines['type'] == 'white', :]
+
+                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "White Wine: " + wine_char + " value of " + str(
+                        wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+        if self.fd_var_wine_char.get() == 4:
+            wine_char = "residual sugar"
+
+            if self.fd_var_wine_type.get() == 8:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                red = all_wines.loc[all_wines['type'] == 'red', :]
+
+                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
+
+            if self.fd_var_wine_type.get() == 9:
+                print(self.fd_var_wine_type)
+                print(self.fd_var_wine_char)
+
+                wine_char_value = int(self.freq_dist_value.get())
+                wine_char_2 = "quality"
+                all_wines = pd.read_csv('winequality-both.csv')
+
+                white = all_wines.loc[all_wines['type'] == 'white', :]
+
+                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+
+                wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
+
+                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                plt.title(
+                    "White Wine: " + wine_char + " value of " + str(
+                        wine_char_value) + ", frequencies by " + wine_char_2)
+                plt.ylabel('Number of wines')
+
+                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                plt.show()
 
 if __name__ == "__main__":
-    root = Tk()
-    main = LoginFrame(root)
-    root.geometry("400x400+500+300")
-    root.mainloop()
+    app = SampleApp()
+    app.geometry("600x200+500+300")
+    app.mainloop()
