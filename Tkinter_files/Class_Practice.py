@@ -542,23 +542,27 @@ class FreqDistFrame(tk.Frame):
                 print(self.fd_var_wine_type)
                 print(self.fd_var_wine_char)
 
-                wine_char_value = int(self.freq_dist_value.get())
-                wine_char_2 = "quality"
-                all_wines = pd.read_csv('winequality-both.csv')
+                wine_char_value = float(self.freq_dist_value.get())
+                if wine_char_value > 1.58 or wine_char_value < 0.08 or wine_char_value == "":
+                    tm.showerror("Error", "Incorrect Input. Please enter a value between 0.08 and 1.58")
+                else:
+                    wine_char_2 = "quality"
+                    all_wines = pd.read_csv('winequality-both.csv')
 
-                red = all_wines.loc[all_wines['type'] == 'red', :]
+                    red = all_wines.loc[all_wines['type'] == 'red', :]
 
-                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+                    red_wine_char = red.loc[red[self.wine_char] == wine_char_value, :]
 
-                wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
+                    wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
-                seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
-                plt.title(
-                    "Red Wine: " + wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
-                plt.ylabel('Number of wines')
+                    seaborn.distplot(wine_char_value_data_set, bins=10, kde=False)
+                    plt.title(
+                        "Red Wine: " + self.wine_char + " value of " + str(wine_char_value) + ", frequencies by " + wine_char_2)
+                    plt.ylabel('Number of wines')
 
-                plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-                plt.show()
+                    plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                    plt.show()
+
 
             if self.fd_var_wine_type.get() == 9:
                 print(self.fd_var_wine_type)
@@ -570,7 +574,7 @@ class FreqDistFrame(tk.Frame):
 
                 white = all_wines.loc[all_wines['type'] == 'white', :]
 
-                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+                white_wine_char = white.loc[white[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
@@ -596,7 +600,7 @@ class FreqDistFrame(tk.Frame):
 
                 red = all_wines.loc[all_wines['type'] == 'red', :]
 
-                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+                red_wine_char = red.loc[red[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
@@ -618,7 +622,7 @@ class FreqDistFrame(tk.Frame):
 
                 white = all_wines.loc[all_wines['type'] == 'white', :]
 
-                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+                white_wine_char = white.loc[white[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
@@ -644,7 +648,7 @@ class FreqDistFrame(tk.Frame):
 
                 red = all_wines.loc[all_wines['type'] == 'red', :]
 
-                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+                red_wine_char = red.loc[red[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
@@ -666,7 +670,7 @@ class FreqDistFrame(tk.Frame):
 
                 white = all_wines.loc[all_wines['type'] == 'white', :]
 
-                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+                white_wine_char = white.loc[white[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
@@ -692,7 +696,7 @@ class FreqDistFrame(tk.Frame):
 
                 red = all_wines.loc[all_wines['type'] == 'red', :]
 
-                red_wine_char = red.loc[red[wine_char] == wine_char_value, :]
+                red_wine_char = red.loc[red[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = red_wine_char.loc[:, wine_char_2]
 
@@ -714,7 +718,7 @@ class FreqDistFrame(tk.Frame):
 
                 white = all_wines.loc[all_wines['type'] == 'white', :]
 
-                white_wine_char = white.loc[white[wine_char] == wine_char_value, :]
+                white_wine_char = white.loc[white[self.wine_char] == wine_char_value, :]
 
                 wine_char_value_data_set = white_wine_char.loc[:, wine_char_2]
 
