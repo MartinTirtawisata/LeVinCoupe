@@ -99,9 +99,9 @@ class MenuFrame(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        self.top_Frame = tk.Frame(self, bg="yellow")
+        self.top_Frame = tk.Frame(self)
         self.top_Frame.pack(side=TOP, fill=BOTH, expand=True)
-        self.bot_Frame = tk.Frame(self, bg="green")
+        self.bot_Frame = tk.Frame(self)
         self.bot_Frame.pack(side=BOTTOM, fill=X)
 
         self.button_A = tk.Button(self.top_Frame, text="Register other employees",
@@ -217,9 +217,9 @@ class AssociationFrame(tk.Frame):
 
         self.top_Frame = tk.Frame(self)
         self.top_Frame.pack(side=TOP)
-        self.left_Frame = tk.Frame(self.top_Frame, bg="green")
+        self.left_Frame = tk.Frame(self.top_Frame)
         self.left_Frame.pack(side=LEFT, fill=BOTH, expand=True)
-        self.right_Frame = tk.Frame(self.top_Frame, bg="blue")
+        self.right_Frame = tk.Frame(self.top_Frame)
         self.right_Frame.pack(side=RIGHT, fill=BOTH, expand=True)
 
         self.middle_Frame = tk.Frame(self, bg="purple")
